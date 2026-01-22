@@ -30,10 +30,48 @@
 
         body {
             font-family: 'Commissioner', sans-serif;
-            background: var(--bg-primary);
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5EBE0 50%, #EFEBE9 100%);
             color: var(--brown-dark);
             line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(197, 165, 114, 0.25) 0%, rgba(197, 165, 114, 0.1) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(141, 110, 99, 0.2) 0%, rgba(141, 110, 99, 0.08) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(1.05);
+            }
         }
 
         .grain-overlay {
@@ -48,10 +86,128 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
+        .background-decoration {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-curve-line-1 {
+            position: absolute;
+            top: 15%;
+            right: -10%;
+            width: 800px;
+            height: 400px;
+        }
+
+        .bg-curve-line-1 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+        }
+
+        .bg-curve-line-2 {
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 700px;
+            height: 350px;
+        }
+
+        .bg-curve-line-2 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .bg-curve-line-3 {
+            position: absolute;
+            bottom: 10%;
+            right: -5%;
+            width: 600px;
+            height: 300px;
+        }
+
+        .bg-curve-line-3 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.18;
+        }
+
+        .bg-wave-line-1 {
+            position: absolute;
+            top: 25%;
+            left: 10%;
+            width: 500px;
+            height: 200px;
+            animation: float-wave 20s ease-in-out infinite;
+        }
+
+        .bg-wave-line-1 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.12;
+        }
+
+        .bg-wave-line-2 {
+            position: absolute;
+            bottom: 25%;
+            right: 15%;
+            width: 450px;
+            height: 180px;
+            animation: float-wave 25s ease-in-out infinite reverse;
+        }
+
+        .bg-wave-line-2 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.14;
+        }
+
+        .bg-flowing-curve {
+            position: absolute;
+            top: 60%;
+            left: 20%;
+            width: 400px;
+            height: 250px;
+            animation: drift 30s ease-in-out infinite;
+        }
+
+        .bg-flowing-curve svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        @keyframes float-wave {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateX(30px) translateY(-20px) rotate(5deg);
+            }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         header {
@@ -79,6 +235,38 @@
             height: 4px;
             background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
             animation: slideIn 1.2s ease-out 0.3s backwards;
+        }
+
+        .subtitle {
+            font-family: 'Commissioner', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 500;
+            color: var(--brown-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .subtitle::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin-left: 15px;
+            vertical-align: middle;
         }
 
         .section {
@@ -197,18 +385,19 @@
             align-items: center;
             gap: 1rem;
             padding: 1.2rem 1.5rem;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
             border-left: 3px solid var(--gold);
             border-radius: 2px;
             text-decoration: none;
             color: var(--brown-dark);
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow);
+            box-shadow: 0 2px 8px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.08);
         }
 
         .contact-item:hover {
             transform: translateX(8px);
-            box-shadow: 0 4px 20px var(--shadow-hover);
+            box-shadow: 0 4px 20px var(--shadow-hover), 0 2px 6px rgba(197, 165, 114, 0.12);
             border-left-color: var(--brown-medium);
         }
 
@@ -233,17 +422,18 @@
         }
 
         .degree-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 4px;
             border-top: 3px solid var(--gold);
-            box-shadow: 0 4px 15px var(--shadow);
+            box-shadow: 0 4px 15px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .degree-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px var(--shadow-hover);
+            box-shadow: 0 12px 35px var(--shadow-hover), 0 3px 8px rgba(197, 165, 114, 0.15);
             border-top-color: var(--brown-medium);
         }
 
@@ -308,16 +498,17 @@
         }
 
         .skill-category {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 4px;
-            box-shadow: 0 3px 12px var(--shadow);
+            box-shadow: 0 3px 12px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.08);
             transition: all 0.4s ease;
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--shadow-hover);
+            box-shadow: 0 10px 30px var(--shadow-hover), 0 3px 8px rgba(197, 165, 114, 0.12);
         }
 
         .skill-category-title {
@@ -353,10 +544,11 @@
         }
 
         .experience-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: 4px;
-            box-shadow: 0 4px 20px var(--shadow);
+            box-shadow: 0 4px 20px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.1);
             border-left: 4px solid var(--gold);
             transition: all 0.4s ease;
             margin-bottom: 2rem;
@@ -364,7 +556,7 @@
 
         .experience-card:hover {
             transform: translateX(8px);
-            box-shadow: 0 8px 35px var(--shadow-hover);
+            box-shadow: 0 10px 40px var(--shadow-hover), 0 4px 10px rgba(197, 165, 114, 0.15);
             border-left-color: var(--brown-medium);
         }
 
@@ -422,10 +614,11 @@
         }
 
         .project-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 4px 15px var(--shadow);
+            box-shadow: 0 4px 15px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
@@ -434,7 +627,7 @@
 
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 40px var(--shadow-hover);
+            box-shadow: 0 15px 45px var(--shadow-hover), 0 5px 12px rgba(197, 165, 114, 0.15);
             border-top-color: var(--gold);
         }
 
@@ -487,17 +680,18 @@
         }
 
         .club-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: 4px;
-            box-shadow: 0 4px 15px var(--shadow);
+            box-shadow: 0 4px 15px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.08);
             border-left: 4px solid var(--gold);
             transition: all 0.4s ease;
         }
 
         .club-card:hover {
             transform: translateX(8px);
-            box-shadow: 0 8px 30px var(--shadow-hover);
+            box-shadow: 0 10px 35px var(--shadow-hover), 0 4px 10px rgba(197, 165, 114, 0.12);
         }
 
         .club-title {
@@ -605,6 +799,13 @@
             .name {
                 font-size: 2.5rem;
             }
+
+            .subtitle::before,
+            .subtitle::after {
+                width: 20px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
         }
 
         .smooth-scroll {
@@ -614,16 +815,34 @@
 </head>
 <body class="smooth-scroll">
     <div class="grain-overlay"></div>
+    <div class="background-decoration">
+        <div class="bg-curve-line-1">
+            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,200 Q 200,100 400,200 T 800,200" stroke="#C5A572" stroke-width="2.5" fill="none"/>
+            </svg>
+        </div>
+        <div class="bg-curve-line-3">
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,150 Q 150,80 300,150 T 600,150" stroke="#8D6E63" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        <div class="bg-flowing-curve">
+            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,125 C 100,50 150,200 250,125 C 300,75 350,175 400,125" stroke="#A1887F" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+    </div>
     
     <div class="container">
         <header>
             <h1 class="name">Sohan Mulamalla</h1>
+            <p class="subtitle">Software Engineer | ML Systems & Full Stack</p>
         </header>
 
         <!-- Section 1: Introduction -->
         <section class="section">
             <p class="intro-text">
-                I’m Sohan Mulamalla, a software engineer focused on machine learning–driven systems and backend engineering. I study Computer Science with a Machine Learning specialization at the University of Chicago, with a minor in Biological Sciences, which informs my interest in applying ML to complex, real-world problems. This site highlights my experience building and deploying ML-backed applications, along with selected projects and engineering work.
+                I'm Sohan Mulamalla, a software engineer focused on machine learning–driven systems and backend engineering. I study Computer Science with a Machine Learning specialization at the University of Chicago, with a minor in Biological Sciences, which informs my interest in applying ML to complex, real-world problems. This site highlights my experience building and deploying ML-backed applications, along with selected projects and engineering work.
             </p>
             
             <button class="dropdown-trigger" onclick="toggleDropdown('contacts')">
@@ -635,9 +854,9 @@
             
             <div id="contacts" class="dropdown-content">
                 <div class="contact-links">
-                    <a href="mailto:smulamalla@uchicago.edu" class="contact-item">
+                    <a href="/cdn-cgi/l/email-protection#196a746c75787478757578596c7a71707a787e76377c7d6c" class="contact-item">
                         <span class="contact-label">Work Email</span>
-                        <span class="contact-value">smulamalla@uchicago.edu</span>
+                        <span class="contact-value"><span class="__cf_email__" data-cfemail="75061800191418141919143500161d1c1614121a5b101100">[email&#160;protected]</span></span>
                     </a>
                     <a href="https://github.com/smulamalla" target="_blank" class="contact-item">
                         <span class="contact-label">GitHub</span>
@@ -777,7 +996,7 @@
                 </div>
 
                 <div class="skill-category">
-                    <h3 class="skill-category-title">Additional Experience</h3>
+                    <h3 class="skill-category-title">Others</h3>
                     <button class="dropdown-trigger" onclick="toggleDropdown('frameworks')">
                         <span>View List</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -837,6 +1056,36 @@
                     <li>Created automated testing tools to support consistent and reproducible model deployments, improving training efficiency by 15%.</li>
                     <li>Debugged and optimized production workflows, enhancing system reliability and reducing error rates in live systems.</li>
                     <li>Built high-performance evaluation pipelines in Python/C++, optimizing evaluation frameworks and reducing runtime by 25%.</li>
+                </ul>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="experience-title">Human Computer Integration Research</h3>
+                    <div class="experience-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
+                            </svg>
+                            University of Chicago
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 2C6.9 2 6 2.9 6 4C6 5.1 6.9 6 8 6C9.1 6 10 5.1 10 4C10 2.9 9.1 2 8 2ZM8 12C5.3 12 3 10.4 3 8.5C3 7.3 4.7 6.2 7 6C7.3 6 7.7 6 8 6C8.3 6 8.7 6 9 6C11.3 6.2 13 7.3 13 8.5C13 10.4 10.7 12 8 12Z"/>
+                            </svg>
+                            Chicago, Illinois
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
+                            </svg>
+                            September 2025 – December 2025
+                        </span>
+                    </div>
+                </div>
+                <ul class="experience-details">
+                    <li>Conducting user studies and analyzing behavioral data to investigate how people interact with emerging technology.</li>
+                    <li>Collaborating on interface design and usability testing to improve user experience.</li>
                 </ul>
             </div>
         </section>
@@ -932,15 +1181,6 @@
             
             <div class="clubs-grid">
                 <div class="club-card">
-                    <h3 class="club-title">Human Computer Interaction Research</h3>
-                    <p class="club-subtitle">Lab at The University of Chicago</p>
-                    <ul class="club-details">
-                        <li>Conducting user studies and analyzing behavioral data to investigate how people interact with emerging technology.</li>
-                        <li>Collaborating on interface design and usability testing to improve user experience.</li>
-                    </ul>
-                </div>
-
-                <div class="club-card">
                     <h3 class="club-title">Alt Protein Accelerator</h3>
                     <p class="club-subtitle">Club at The University of Chicago</p>
                     <ul class="club-details">
@@ -976,7 +1216,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function toggleDropdown(id) {
             const content = document.getElementById(id);
             const trigger = event.currentTarget;
@@ -1008,14 +1248,4 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-</body>
-</html>
+                    entry.targe
