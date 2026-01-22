@@ -299,8 +299,9 @@
             top: 50%;
             transform: translateY(-50%);
             width: 20px;
-            height: 2px;
+            height: 3px;
             background: var(--gold);
+            border-radius: 2px;
         }
 
         .intro-text {
@@ -845,7 +846,7 @@
                 I'm Sohan Mulamalla, a software engineer focused on machine learning–driven systems and backend engineering. I study Computer Science with a Machine Learning specialization at the University of Chicago, with a minor in Biological Sciences, which informs my interest in applying ML to complex, real-world problems. This site highlights my experience building and deploying ML-backed applications, along with selected projects and engineering work.
             </p>
             
-            <button class="dropdown-trigger" onclick="toggleDropdown('contacts')">
+            <button class="dropdown-trigger" onclick="toggleDropdown('contacts', event)">
                 <span>Contact Information</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -889,7 +890,7 @@
                 </div>
             </div>
 
-            <button class="dropdown-trigger" onclick="toggleDropdown('courses')">
+            <button class="dropdown-trigger" onclick="toggleDropdown('courses', event)">
                 <span>Specialized Coursework</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -942,7 +943,7 @@
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3 class="skill-category-title">Languages</h3>
-                    <button class="dropdown-trigger" onclick="toggleDropdown('languages')">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('languages', event)">
                         <span>View List</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -960,7 +961,7 @@
 
                 <div class="skill-category">
                     <h3 class="skill-category-title">Frameworks</h3>
-                    <button class="dropdown-trigger" onclick="toggleDropdown('tools')">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('tools', event)">
                         <span>View List</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -979,7 +980,7 @@
 
                 <div class="skill-category">
                     <h3 class="skill-category-title">Data Stack</h3>
-                    <button class="dropdown-trigger" onclick="toggleDropdown('libraries')">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('libraries', event)">
                         <span>View List</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -996,8 +997,8 @@
                 </div>
 
                 <div class="skill-category">
-                    <h3 class="skill-category-title">Others</h3>
-                    <button class="dropdown-trigger" onclick="toggleDropdown('frameworks')">
+                    <h3 class="skill-category-title">Additional Experience</h3>
+                    <button class="dropdown-trigger" onclick="toggleDropdown('frameworks', event)">
                         <span>View List</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1216,8 +1217,8 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        function toggleDropdown(id) {
+    <script>
+        function toggleDropdown(id, event) {
             const content = document.getElementById(id);
             const trigger = event.currentTarget;
             
@@ -1248,4 +1249,12 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.targe
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
