@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sohan Mulamalla | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700;900&family=Commissioner:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FDF8F3;
+            --bg-secondary: #F5EBE0;
+            --brown-dark: #3E2723;
+            --brown-medium: #5D4037;
+            --brown-light: #8D6E63;
+            --brown-accent: #A1887F;
+            --brown-subtle: #D7CCC8;
+            --cream: #EFEBE9;
+            --gold: #C5A572;
+            --shadow: rgba(62, 39, 35, 0.08);
+            --shadow-hover: rgba(62, 39, 35, 0.15);
+        }
+
+        .theme-light {
+            --band-bg: var(--bg-primary);
+            --t-heading: var(--brown-dark);
+            --t-text: var(--brown-medium);
+            --t-muted: var(--brown-light);
+            --t-surface: rgba(255, 255, 255, 0.95);
+            --t-surface-soft: var(--cream);
+            --t-border: var(--brown-subtle);
+            --t-shadow: var(--shadow);
+            --t-shadow-hover: var(--shadow-hover);
+            --t-btn-bg: var(--brown-dark);
+            --t-btn-text: var(--bg-primary);
+        }
+
+        .theme-dark {
+            --band-bg: var(--brown-dark);
+            --t-heading: var(--bg-primary);
+            --t-text: var(--cream);
+            --t-muted: var(--brown-subtle);
+            --t-surface: rgba(255, 255, 255, 0.06);
+            --t-surface-soft: rgba(255, 255, 255, 0.09);
+            --t-border: rgba(239, 235, 233, 0.18);
+            --t-shadow: rgba(0, 0, 0, 0.25);
+            --t-shadow-hover: rgba(0, 0, 0, 0.4);
+            --t-btn-bg: var(--bg-primary);
+            --t-btn-text: var(--brown-dark);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Commissioner', sans-serif;
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5EBE0 50%, #EFEBE9 100%);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(197, 165, 114, 0.25) 0%, rgba(197, 165, 114, 0.1) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -15%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(141, 110, 99, 0.2) 0%, rgba(141, 110, 99, 0.08) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(1.05);
+            }
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 500;
+            background: rgba(62, 39, 35, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(197, 165, 114, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .site-nav-inner {
+            max-width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.4rem;
+            flex-wrap: wrap;
+        }
+
+        .site-nav-link {
+            font-family: 'Commissioner', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--cream);
+            text-decoration: none;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .site-nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .site-nav-link:hover {
+            color: var(--gold);
+        }
+
+        .site-nav-link:hover::after {
+            width: 100%;
+        }
+
+        body {
+            padding-top: 60px;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav {
+                height: auto;
+            }
+
+            .site-nav-inner {
+                padding: 0.8rem 1.5rem;
+                gap: 0.9rem 1.6rem;
+            }
+
+            .site-nav-link {
+                font-size: 0.75rem;
+            }
+
+            body {
+                padding-top: 0;
+            }
+        }
+
+        .background-decoration {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            mix-blend-mode: difference;
+        }
+
+        .bg-curve-line-1 {
+            position: absolute;
+            top: 15%;
+            right: -10%;
+            width: 800px;
+            height: 400px;
+            animation: drift-slow 34s ease-in-out infinite;
+        }
+
+        .bg-curve-line-1 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.28;
+        }
+
+        .bg-curve-line-2 {
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 700px;
+            height: 350px;
+        }
+
+        .bg-curve-line-2 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+        }
+
+        .bg-curve-line-3 {
+            position: absolute;
+            bottom: 10%;
+            right: -5%;
+            width: 600px;
+            height: 300px;
+            animation: drift-slow 28s ease-in-out infinite reverse;
+        }
+
+        .bg-curve-line-3 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.24;
+        }
+
+        .bg-wave-line-1 {
+            position: absolute;
+            top: 25%;
+            left: 10%;
+            width: 500px;
+            height: 200px;
+            animation: float-wave 20s ease-in-out infinite;
+        }
+
+        .bg-wave-line-1 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.12;
+        }
+
+        .bg-wave-line-2 {
+            position: absolute;
+            bottom: 25%;
+            right: 15%;
+            width: 450px;
+            height: 180px;
+            animation: float-wave 25s ease-in-out infinite reverse;
+        }
+
+        .bg-wave-line-2 svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.14;
+        }
+
+        .bg-flowing-curve {
+            position: absolute;
+            top: 60%;
+            left: 20%;
+            width: 400px;
+            height: 250px;
+            animation: drift 30s ease-in-out infinite;
+        }
+
+        .bg-flowing-curve svg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.16;
+        }
+
+        @keyframes float-wave {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-50px) translateX(35px);
+            }
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateX(48px) translateY(-34px) rotate(8deg);
+            }
+        }
+
+        @keyframes drift-slow {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateX(-42px) translateY(42px) rotate(-6deg) scale(1.05);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-band {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
+        }
+
+        .section-band::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: var(--band-bg);
+        }
+
+        .section-band > .container {
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+
+        .section-divider {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
+            height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .divider-ltd {
+            background: linear-gradient(to bottom, var(--bg-primary) 50%, var(--brown-dark) 50%);
+        }
+
+        .divider-dtl {
+            background: linear-gradient(to bottom, var(--brown-dark) 50%, var(--bg-primary) 50%);
+        }
+
+        .divider-ornament {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .divider-line {
+            width: 130px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+
+        .divider-ornament .divider-line:last-child {
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .divider-diamond {
+            width: 11px;
+            height: 11px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            box-shadow: 0 0 16px rgba(197, 165, 114, 0.55);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .divider-line {
+                width: 60px;
+            }
+        }
+
+        header {
+            padding: 3rem 0 4rem;
+            text-align: center;
+        }
+
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 9vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+            color: var(--brown-dark);
+            background: linear-gradient(120deg, var(--brown-dark) 0%, var(--brown-medium) 30%, var(--gold) 55%, var(--brown-dark) 85%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 0 rgba(197, 165, 114, 0.1);
+            opacity: 0;
+            transform: translateY(-70px);
+            animation: nameDropIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                       nameShimmer 9s ease-in-out infinite 0.9s;
+        }
+
+        @keyframes nameDropIn {
+            0% { opacity: 0; transform: translateY(-70px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes nameShimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .name::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -20px;
+            width: 9px;
+            height: 9px;
+            background: var(--gold);
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .name::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+            animation: slideIn 1.2s ease-out 0.3s backwards;
+        }
+
+        .subtitle {
+            font-family: 'Commissioner', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 500;
+            color: var(--brown-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.75s forwards;
+        }
+
+        .tw-text::after {
+            content: '|';
+            display: inline-block;
+            margin-left: 2px;
+            color: var(--gold);
+            opacity: 0;
+        }
+
+        .tw-text.typing::after {
+            animation: twBlink 0.8s step-end infinite;
+        }
+
+        @keyframes twBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .subtitle::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+
+        .profile-photo-block {
+            margin-top: 2rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        }
+
+        .profile-intro-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 2.5rem;
+            text-align: left;
+        }
+
+        .profile-intro-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .profile-photo-wrap {
+            position: relative;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .photo-ripple {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            opacity: 0;
+            transform: scale(0.8);
+            animation: photoRipple 1s ease-out forwards;
+            animation-delay: 2.6s;
+            pointer-events: none;
+        }
+
+        @keyframes photoRipple {
+            0% { opacity: 0.9; transform: scale(0.8); }
+            70% { opacity: 0.3; }
+            100% { opacity: 0; transform: scale(1.35); }
+        }
+
+        .profile-photo {
+            width: clamp(170px, 36vw, 427px);
+            height: clamp(170px, 36vw, 427px);
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+            border: 6px solid var(--bg-primary);
+            box-shadow: 0 0 0 3px var(--gold), 0 16px 40px var(--shadow), 0 5px 14px rgba(197, 165, 114, 0.15);
+            opacity: 0;
+            transform: scale(0.4);
+            animation: photoPopIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 2.6s;
+        }
+
+        @keyframes photoPopIn {
+            0% { opacity: 0; transform: scale(0.4); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .grad-line {
+            margin-top: 0;
+            animation-delay: 2.3s;
+        }
+
+        .academic-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin-top: 1.1rem;
+            align-items: flex-start;
+        }
+
+        .academic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 1.1rem;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--brown-subtle);
+            border-radius: 16px;
+            box-shadow: 0 3px 10px var(--shadow);
+            font-family: 'Commissioner', sans-serif;
+            color: var(--brown-dark);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: badgePopIn 0.7s ease-out forwards;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .academic-badge:nth-child(1) { animation-delay: 3.7s; }
+        .academic-badge:nth-child(2) { animation-delay: 3.85s; }
+
+        @keyframes badgePopIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .academic-badge:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px var(--shadow-hover);
+        }
+
+        .academic-badge svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .badge-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            line-height: 1.25;
+        }
+
+        .badge-degree {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+        }
+
+        .academic-badge .badge-detail {
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--brown-medium);
+        }
+
+        .profile-photo-block .dropdown-trigger {
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: badgePopIn 0.8s ease-out forwards;
+            animation-delay: 4.6s;
+        }
+
+        .profile-photo-block .dropdown-content {
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .profile-intro-row {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .profile-intro-content {
+                align-items: center;
+            }
+
+            .academic-badges {
+                align-items: center;
+            }
+
+            .academic-badge {
+                font-size: 0.82rem;
+                padding: 0.55rem 1rem;
+            }
+        }
+
+        .section {
+            margin: 3rem 0 5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-play-state: paused;
+        }
+
+        .section { animation-delay: 0.1s; }
+
+        .soft-reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            animation: softFadeUp 0.85s ease-out forwards;
+            animation-play-state: paused;
+        }
+
+        @keyframes softFadeUp {
+            0% { opacity: 0; transform: translateY(22px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--brown-dark);
+            letter-spacing: -0.02em;
+            margin-bottom: 2.75rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -14px;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 16px;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+        }
+
+        .intro-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            line-height: 1.8;
+            color: var(--brown-medium);
+            max-width: 900px;
+            font-weight: 400;
+        }
+
+        .intro-text + .intro-text {
+            margin-top: 1.25rem;
+        }
+
+        .dropdown-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--brown-dark);
+            color: var(--bg-primary);
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 2px;
+            font-family: 'Commissioner', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-trigger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .dropdown-trigger:hover::before {
+            left: 100%;
+        }
+
+        .dropdown-trigger:hover {
+            background: var(--brown-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+        }
+
+        .dropdown-trigger svg {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-trigger.active svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            opacity: 0;
+            margin-top: 1.5rem;
+        }
+
+        .dropdown-content.active {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .dropdown-content > * {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid var(--gold);
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--brown-dark);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.08);
+        }
+
+        .contact-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px var(--shadow-hover), 0 2px 6px rgba(197, 165, 114, 0.12);
+            border-left-color: var(--brown-medium);
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--brown-medium);
+            min-width: 100px;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+        }
+
+        .contact-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--brown-light);
+        }
+
+        .degrees {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .degree-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 4px;
+            border-top: 3px solid var(--gold);
+            box-shadow: 0 4px 15px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .degree-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px var(--shadow-hover), 0 3px 8px rgba(197, 165, 114, 0.15);
+            border-top-color: var(--brown-medium);
+        }
+
+        .degree-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .degree-title svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .degree-subtitle {
+            font-size: 1.05rem;
+            color: var(--brown-light);
+            font-style: italic;
+        }
+
+        .courses-section {
+            margin-top: 2rem;
+        }
+
+        .course-category {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--brown-medium);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--brown-subtle);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .course-item {
+            padding: 1rem 1.2rem;
+            background: var(--cream);
+            border-radius: 2px;
+            font-size: 0.95rem;
+            color: var(--brown-dark);
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .course-item:hover {
+            background: white;
+            border-left-color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 3px 12px var(--shadow), 0 1px 3px rgba(197, 165, 114, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-hover), 0 3px 8px rgba(197, 165, 114, 0.12);
+        }
+
+        .skill-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .skill-category-title svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            color: var(--brown-medium);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--brown-dark);
+            color: var(--bg-primary);
+            transform: scale(1.05);
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.1);
+            border-left: 4px solid var(--gold);
+            transition: all 0.4s ease;
+            margin-bottom: 2rem;
+        }
+
+        .experience-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px var(--shadow-hover), 0 4px 10px rgba(197, 165, 114, 0.15);
+            border-left-color: var(--brown-medium);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.4rem 0.9rem;
+            background: var(--t-surface-soft);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            font-family: 'Commissioner', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--t-heading);
+            margin-bottom: 0.9rem;
+        }
+
+        .type-badge svg {
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .experience-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 1rem;
+            color: var(--brown-light);
+            margin-top: 0.5rem;
+        }
+
+        .experience-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .experience-details {
+            list-style: none;
+        }
+
+        .experience-details li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+
+        .experience-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-top: 3px solid var(--brown-subtle);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px var(--shadow-hover), 0 5px 12px rgba(197, 165, 114, 0.15);
+            border-top-color: var(--gold);
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--brown-medium);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--brown-dark);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .project-link:hover {
+            background: var(--brown-medium);
+            transform: translateX(5px);
+            gap: 0.8rem;
+        }
+
+        .project-feature-card {
+            margin-bottom: 2.5rem;
+        }
+
+        .project-feature-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-links-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.75rem;
+        }
+
+        .project-links-row .project-link {
+            margin-top: 0;
+            align-self: auto;
+        }
+
+        .project-dropdowns {
+            margin-top: 1.75rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--brown-subtle);
+        }
+
+        .project-dropdown-triggers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-dropdown-triggers .dropdown-trigger {
+            margin-top: 0;
+            background: transparent;
+            color: var(--brown-medium);
+            border: 1px solid var(--brown-accent);
+        }
+
+        .project-dropdown-triggers .dropdown-trigger:hover {
+            background: var(--brown-dark);
+            color: var(--bg-primary);
+            border-color: var(--brown-dark);
+        }
+
+        .project-skills-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-skill-group-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--brown-subtle);
+            letter-spacing: 0.02em;
+        }
+
+        .blogs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .blog-card {
+            background: var(--cream);
+            border-left: 3px solid var(--gold);
+            border-radius: 2px;
+            padding: 1.5rem 1.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            background: white;
+            border-left-color: var(--brown-medium);
+        }
+
+        .blog-date-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 1rem;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            font: inherit;
+            text-align: left;
+            color: inherit;
+        }
+
+        .blog-date-trigger .blog-date {
+            margin-bottom: 0;
+        }
+
+        .blog-date-trigger .blog-chevron {
+            flex-shrink: 0;
+            color: var(--brown-light);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .blog-date-trigger:hover .blog-date {
+            color: var(--brown-light);
+        }
+
+        .blog-date-trigger:hover .blog-chevron {
+            color: var(--gold);
+        }
+
+        .blog-date-trigger.active .blog-chevron {
+            transform: rotate(180deg);
+        }
+
+        .blog-card .dropdown-content {
+            margin-top: 0;
+        }
+
+        .blog-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 0.9rem;
+        }
+
+        .blog-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--brown-medium);
+        }
+
+        .blog-text p {
+            margin-bottom: 1rem;
+        }
+
+        .blog-text p:first-child {
+            margin-top: 1.1rem;
+        }
+
+        .blog-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .blog-text code {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(93, 64, 55, 0.1);
+            color: var(--brown-dark);
+            padding: 0.15em 0.45em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .project-dropdown-triggers {
+                flex-direction: column;
+            }
+
+            .project-dropdown-triggers .dropdown-trigger {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .clubs-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .club-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px var(--shadow), 0 2px 5px rgba(197, 165, 114, 0.08);
+            border-left: 4px solid var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .club-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 35px var(--shadow-hover), 0 4px 10px rgba(197, 165, 114, 0.12);
+        }
+
+        .club-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+        }
+
+        .club-subtitle {
+            font-size: 1rem;
+            color: var(--brown-light);
+            font-style: italic;
+            margin-bottom: 1.2rem;
+        }
+
+        .club-details {
+            list-style: none;
+        }
+
+        .club-details li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+
+        .club-details li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            padding: 3rem 0;
+            color: var(--cream);
+            text-align: center;
+        }
+
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 55%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .section-title::before {
+                display: none;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .subtitle::before,
+            .subtitle::after {
+                width: 20px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== Dark-theme overrides (About Me, Education, Experience, footer bands) ===== */
+        .theme-dark .section-title {
+            color: var(--bg-primary);
+        }
+
+        .theme-dark .intro-text {
+            color: var(--cream);
+        }
+
+        .theme-dark .degree-card {
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(197, 165, 114, 0.08);
+        }
+
+        .theme-dark .degree-card:hover {
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 3px 8px rgba(197, 165, 114, 0.12);
+            border-top-color: var(--brown-subtle);
+        }
+
+        .theme-dark .degree-title {
+            color: var(--bg-primary);
+        }
+
+        .theme-dark .degree-subtitle {
+            color: var(--brown-subtle);
+        }
+
+        .theme-dark .dropdown-trigger {
+            background: var(--bg-primary);
+            color: var(--brown-dark);
+        }
+
+        .theme-dark .category-title {
+            color: var(--cream);
+            border-bottom-color: rgba(239, 235, 233, 0.25);
+        }
+
+        .theme-dark .course-item {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--bg-primary);
+        }
+
+        .theme-dark .course-item:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .theme-dark .experience-card {
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 2px 5px rgba(197, 165, 114, 0.08);
+        }
+
+        .theme-dark .experience-card:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(197, 165, 114, 0.12);
+        }
+
+        .theme-dark .experience-title {
+            color: var(--bg-primary);
+        }
+
+        .theme-dark .experience-meta {
+            color: var(--brown-subtle);
+        }
+
+        .theme-dark .experience-details li {
+            color: var(--cream);
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <button type="button" class="site-nav-link" onclick="scrollToSection('home')">Home</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('about')">About Me</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('projects')">Projects</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('education')">Education</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('skills')">Skills</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('experience')">Experience</button>
+            <button type="button" class="site-nav-link" onclick="scrollToSection('clubs')">Clubs / Certificates</button>
+        </div>
+    </nav>
+    <div class="grain-overlay"></div>
+    <div class="background-decoration">
+        <div class="bg-curve-line-1">
+            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,200 Q 200,100 400,200 T 800,200" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+            </svg>
+        </div>
+        <div class="bg-curve-line-3">
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,150 Q 150,80 300,150 T 600,150" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        <div class="bg-flowing-curve">
+            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0,125 C 100,50 150,200 250,125 C 300,75 350,175 400,125" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+    </div>
+    
+    <div class="section-band theme-light band-first">
+        <div class="container">
+        <header>
+            <h1 class="name">Sohan Mulamalla</h1>
+            <p class="subtitle"><span class="tw-text" id="tw-subtitle" data-text="Software Engineer | ML Systems & Full Stack">Software Engineer | ML Systems & Full Stack</span></p>
+
+            <div class="profile-photo-block">
+                <div class="profile-intro-row">
+                    <div class="profile-photo-wrap">
+                        <span class="photo-ripple"></span>
+                        <img src="assets/pfp.jpeg" alt="Sohan Mulamalla" class="profile-photo">
+                    </div>
+                    <div class="profile-intro-content">
+                        <p class="subtitle grad-line"><span class="tw-text" id="tw-gradline" data-text="University of Chicago 2026 Graduate">University of Chicago 2026 Graduate</span></p>
+                        <div class="academic-badges">
+                            <span class="academic-badge">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 2L1 5.5L8 9L15 5.5L8 2Z"/>
+                                    <path d="M4 7V10.5C4 11.5 5.8 12.8 8 12.8C10.2 12.8 12 11.5 12 10.5V7L8 9L4 7Z" opacity="0.85"/>
+                                    <rect x="14.4" y="5.5" width="0.9" height="4.8"/>
+                                </svg>
+                                <span class="badge-text">
+                                    <span class="badge-degree">B.S. Computer Science</span>
+                                    <span class="badge-detail">ML Specialization</span>
+                                </span>
+                            </span>
+                            <span class="academic-badge">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1C8 1 3 3 3 8C3 11 5 14 8 15C11 14 13 11 13 8C13 3 8 1 8 1ZM8 13.5C6 12.5 4.5 10.5 4.5 8C4.5 8 8 8 8 3.5V13.5Z"/>
+                                </svg>
+                                <span class="badge-text">
+                                    <span class="badge-degree">Minor, Biological Sciences</span>
+                                    <span class="badge-detail">Pre-Med Track</span>
+                                </span>
+                            </span>
+                        </div>
+
+                        <button class="dropdown-trigger" onclick="toggleDropdown('contacts', event)">
+                            <span>Contact Information</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+
+                        <div id="contacts" class="dropdown-content">
+                            <div class="contact-links">
+                                <a href="mailto:sohanmulamalla@gmail.com" class="contact-item">
+                                    <span class="contact-label">Work Email</span>
+                                    <span class="contact-value">sohanmulamalla@gmail.com</span>
+                                </a>
+                                <a href="https://github.com/smulamalla" target="_blank" class="contact-item">
+                                    <span class="contact-label">GitHub</span>
+                                    <span class="contact-value">github.com/smulamalla</span>
+                                </a>
+                                <a href="https://www.linkedin.com/in/smulamalla/" target="_blank" class="contact-item">
+                                    <span class="contact-label">LinkedIn</span>
+                                    <span class="contact-value">linkedin.com/in/smulamalla</span>
+                                </a>
+                                <a href="https://uchicago.joinhandshake.com/profiles/smulamalla" target="_blank" class="contact-item">
+                                    <span class="contact-label">Handshake</span>
+                                    <span class="contact-value">joinhandshake.com/profiles/smulamalla</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        </div>
+    </div>
+
+    <div class="section-divider divider-ltd">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-dark">
+        <div class="container">
+        <!-- Section 1: Introduction (About Me) -->
+        <section class="section" id="about">
+            <h2 class="section-title">About Me</h2>
+            <p class="intro-text">
+                My name is Sohan, and I am a software engineer passionate about applying artificial intelligence to healthcare. I graduated from the University of Chicago with a B.S. in Computer Science, specializing in Machine Learning, along with a minor in Biological Sciences while completing the pre-med track. My background in both machine learning and the biological sciences has given me a strong interdisciplinary foundation for developing AI solutions to complex healthcare challenges.
+            </p>
+            <p class="intro-text">
+                I am particularly interested in building intelligent systems that improve clinical decision-making, biomedical research, and patient care. To further develop expertise at the intersection of AI and healthcare, I have designed and built multiple projects focused on real-world medical applications, including retrieval-augmented generation (RAG), clinical decision support, and other machine learning–driven healthcare systems.
+            </p>
+            <p class="intro-text">
+                This website showcases my projects, technical experience, and ongoing work as I continue building AI-powered solutions for healthcare. You can explore my projects and follow my progress below.
+            </p>
+        </section>
+        </div>
+    </div>
+
+    <div class="section-divider divider-dtl">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-light">
+        <div class="container">
+        <!-- Section 2: Projects -->
+        <section class="section" id="projects">
+            <h2 class="section-title">Projects</h2>
+
+            <div class="project-feature-card experience-card soft-reveal">
+                <div class="experience-header">
+                    <h3 class="experience-title">DiaGuide AI</h3>
+                    <div class="experience-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
+                            </svg>
+                            Evidence-Based Diabetes Assistant
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
+                            </svg>
+                            July 2026 - August 2026
+                        </span>
+                    </div>
+                </div>
+                <ul class="experience-details">
+                    <li>Built an evidence-based diabetes guidance assistant using Retrieval-Augmented Generation (RAG) that answers questions exclusively from ADA, CDC, and NICE clinical guidelines.</li>
+                    <li>Engineered a retrieval pipeline featuring conversation-aware question rewriting, Maximal Marginal Relevance (MMR), similarity score filtering, and scope validation to improve retrieval quality and reduce hallucinations.</li>
+                    <li>Developed a polished Streamlit application with transparent source citations, medication extraction, persistent chat history, transcript export, and a custom clinical-inspired user interface.</li>
+                </ul>
+
+                <div class="project-links-row">
+                    <a href="https://diaguide-ai.streamlit.app/?session=32408d82" target="_blank" class="project-link">
+                        <span>Live Demo on Streamlit</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1.5V10M8 1.5L4.5 5M8 1.5L11.5 5M2.5 10.5V13C2.5 13.55 2.95 14 3.5 14H12.5C13.05 14 13.5 13.55 13.5 13V10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/smulamalla/diaguide-ai" target="_blank" class="project-link">
+                        <span>View on GitHub</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M9 3L13 7L9 11M3 7H13"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="project-dropdowns">
+                    <div class="project-dropdown-triggers">
+                        <button class="dropdown-trigger" data-target="p1-blogs" onclick="toggleProjectDropdown('p1-blogs', 'p1-skills', event)">
+                            <span>Progress Blogs</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="dropdown-trigger" data-target="p1-skills" onclick="toggleProjectDropdown('p1-skills', 'p1-blogs', event)">
+                            <span>Skills</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="p1-blogs" class="dropdown-content">
+                        <div class="blogs-list">
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-1" onclick="toggleDropdown('p1-blog-1', event)">
+                                    <span class="blog-date">Day 1 - 7/27</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-1" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Before writing any code, I spent some time researching how I wanted to approach this project. I came across <a href="https://github.com/pixegami/langchain-rag-tutorial" target="_blank" style="color: var(--brown-dark); text-decoration: underline;">Pixegami's LangChain RAG tutorial</a>, which provided a great foundation for building a Retrieval-Augmented Generation (RAG) pipeline. Rather than simply recreating the tutorial, I wanted to build something more practical and aligned with my interest in AI for healthcare.</p>
+                                    <p>My original idea was to create a general medical chatbot, but I decided to narrow the scope to diabetes. Diabetes has an extensive collection of publicly available clinical guidelines and research, making it an ideal domain for a focused RAG application. I also felt that specializing in a single area would make the project more realistic and applicable. From there, I started brainstorming additional features that could make the application genuinely useful in a clinical setting.</p>
+                                    <p>With the project planned out, I set up my development environment by installing the required dependencies, creating a virtual environment, and configuring an OpenAI API key. One lesson I've learned from previous AI projects is the importance of protecting API keys. Early on, I accidentally committed one to GitHub—a mistake every developer hopes to make only once. Since then, I've made it a habit to use environment variables and .gitignore, and it was nice knowing I had set this project up the right way from the beginning.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-2" onclick="toggleDropdown('p1-blog-2', event)">
+                                    <span class="blog-date">Day 2 - 7/28</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-2" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today, I focused on gathering high-quality diabetes resources for the RAG pipeline. I searched through several reputable healthcare organizations to find the most up-to-date clinical guidelines and statistics. I ended up selecting reports from the American Diabetes Association (ADA) for the Standards of Care, the CDC for diabetes statistics, and NICE for clinical guidelines. I had hoped to include a report from the WHO as well, but I was surprised to find that their most relevant diabetes publication was from 2016. For now, I decided to start with just a few trusted sources so I could verify that the pipeline worked correctly before expanding the knowledge base.</p>
+                                    <p>After downloading the PDFs, I organized them into my data directory and created a JSON file containing metadata for each document, including the organization, source URL, publication year, citation, and other useful information. This took longer than I expected, but having accurate metadata would later allow me to generate proper source citations in the application.</p>
+                                    <p>I then created load_documents.py, which loads the PDFs, attaches the metadata to each page, and splits the documents into smaller chunks for embedding and retrieval. During testing, I ran into an issue because the tutorial I was following used an older LangChain package that had since been updated. After a bit of debugging and research, I updated the code to the current API, and everything worked as expected—the documents loaded successfully, the metadata was attached correctly, and the chunks were ready for the next stage of the pipeline.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-3" onclick="toggleDropdown('p1-blog-3', event)">
+                                    <span class="blog-date">Day 3 - 7/29</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-3" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the documents loaded, the next step was creating the vector database using Chroma. This was my first time working with Chroma, and I was pleasantly surprised by how straightforward the setup was. Before generating the embeddings, I realized my OpenAI account didn't have any API credits, so I added some, ran a quick test request to verify everything was working, and confirmed the API was responding correctly. Once that was done, I ran my script, and Chroma successfully created the vector database.</p>
+                                    <p>Next, I built the RAG pipeline itself. I created a prompt template that instructed the language model to answer questions using only the retrieved context from the database. When a user asks a question, it is converted into an embedding, Chroma retrieves the most relevant document chunks, and those chunks are passed to the model to generate a response.</p>
+                                    <p>I chose gpt-4o-mini because it offers an excellent balance between performance and cost, making it a great fit for this project. The initial version of the application was able to answer questions and return useful source information, including the document title, citation, URL, and page number. I did run into one issue where the tutorial used the outdated langchain.prompts package, but after updating it to langchain_core.prompts, everything worked as expected.</p>
+                                    <p>To test the pipeline, I asked, "What is the target A1C for most adults with type 2 diabetes?" The model correctly responded that the target A1C is less than 7.0% (53 mmol/mol) and included citations to the supporting guideline. Seeing both an accurate answer and proper source attribution was a satisfying milestone—it showed that the core RAG pipeline was working exactly as intended.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-4" onclick="toggleDropdown('p1-blog-4', event)">
+                                    <span class="blog-date">Day 4 - 7/30</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-4" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>My goal for today's coding session was to have a working version of the application running through Streamlit. Since I had never used Streamlit before, I started by creating a simple chat interface. I was impressed by how quickly it can turn a Python script into a web application with very little frontend code. In app.py, I connected the RAG pipeline from the previous day to a chat-style UI that accepts user questions, displays the model's response, and shows the supporting sources in a collapsible section.</p>
+                                    <p>The first time I ran the application, I was greeted with several missing module errors. This was confusing because I had already installed the required packages. After some debugging, I discovered that Streamlit was running from my Anaconda installation instead of my project's virtual environment. Running it with my environment's Python (python -m streamlit) solved the issue, and the application launched successfully.</p>
+                                    <p>With the interface working, I tested the model using questions across five categories: diagnosis and screening, treatment targets, medications, complications, and diabetes statistics. For the most part, the results were excellent. The model answered each question correctly while providing the relevant sources, citations, and page numbers. However, when I asked an out-of-scope question about treating a broken arm, the model still generated an answer. Although it acknowledged that the information wasn't found in the guidelines, it attempted to fill in the gaps with unrelated medical knowledge. In a healthcare application, this kind of hallucination is unacceptable.</p>
+                                    <p>To solve this, I added a scope-checking step before generating a response. Using Chroma's similarity search together with a dedicated classification prompt, the application first determines whether a question falls within the scope of the diabetes guidelines. If it doesn't, the model refuses to answer instead of attempting to generate a response. My first implementation was too restrictive and incorrectly rejected valid diabetes questions, but after refining the prompt to better define the application's scope, the balance was much better.</p>
+                                    <p>I also improved how sources were displayed. Previously, the same document would appear multiple times if information came from different pages. I updated the application to group pages under a single source, making the citations much cleaner. I also added a few quality-of-life improvements, such as hiding the URL field whenever a source doesn't include one.</p>
+                                    <p>By the end of the day, I had a working end-to-end application that I could actually demo. The model answered diabetes-related questions, cited its sources, refused out-of-scope requests, and presented everything through a clean web interface. It took around six to seven hours of work, but it was one of the most rewarding sessions so far. With the foundation complete, my next steps are to expand the knowledge base, improve the UI, and continue adding features to make the application more useful in real clinical scenarios.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-5" onclick="toggleDropdown('p1-blog-5', event)">
+                                    <span class="blog-date">Day 5 - 7/31</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-5" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today's focus was on making the application feel more like a real conversational assistant. Up until now, every question was treated independently, meaning the model couldn't understand follow-up questions. For example, if I asked, "What is the target A1C for older adults?" followed by "What about someone with kidney disease?", the model wouldn't know that the second question was still referring to older adults. To solve this, I added conversation memory by creating a prompt that rewrites the user's latest question using the chat history. This gives the RAG pipeline a fully contextualized question while keeping the retrieval process accurate.</p>
+                                    <p>Next, I improved the source citations. I wanted the most relevant sources to appear first, so I sorted them based on Chroma's similarity scores before displaying them in the dropdown. I also added a small UI improvement that shows the number of sources returned for each response.</p>
+                                    <p>Finally, I started building a medication reference panel. Whenever the model mentions a diabetes medication, a separate panel now appears with quick-reference cards for each drug. To support this, I created a lookup table that maps medications to their drug classes (for example, metformin → biguanide and semaglutide → GLP-1 receptor agonist). After the model generates its response, the application scans the text for medication names and displays the matching cards below the answer. The feature worked well during testing and helps separate medication information from the main response, making it easier to skim. I still plan to refine the UI by moving the panel to the side so the written answer remains the primary focus, but I'm happy with how the feature turned out.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-6" onclick="toggleDropdown('p1-blog-6', event)">
+                                    <span class="blog-date">Day 6 - 8/3</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-6" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>I originally planned to revisit the medication panel later when I polished the rest of the UI, but I was happy with how the feature was coming together and couldn't resist improving it now. After a few attempts, I moved the panel into Streamlit's sidebar using <code>st.sidebar</code>, which gave the chat interface much more room while keeping the medication information easily accessible.</p>
+                                    <p>I also switched from using <code>st.markdown</code> to <code>st.info</code> for each medication card. The card layout made the medications much easier to distinguish at a glance and gave the interface a much cleaner look. To finish it off, I added a collapsible header that displays the number of medications referenced in the response. It took a bit of debugging—mostly typos and code placement mistakes—but I eventually got everything working the way I envisioned.</p>
+                                    <p>The other feature I wanted to add was a proper medical disclaimer. Since this application is based on clinical guidelines, I wanted to make it clear that it is intended for educational purposes and should never replace professional medical advice or clinical judgment. When users launch the application, they are now presented with a disclaimer that they must acknowledge before continuing. I also added a smaller reminder beneath the application's title so the message is always visible. My first version used large warning boxes throughout the interface, but they felt distracting and took attention away from the chat. The final design is much more subtle while still making the application's purpose and limitations clear.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-7" onclick="toggleDropdown('p1-blog-7', event)">
+                                    <span class="blog-date">Day 7 - 8/4</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-7" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today was the part of the project I had been looking forward to the most: designing the UI. I've always enjoyed frontend work because it's where I can combine engineering with creativity. My goal wasn't just to make the application look nice—I wanted it to have its own identity rather than feeling like another generic AI chatbot.</p>
+                                    <p>I took inspiration from Continuous Glucose Monitors (CGMs), especially the FreeStyle Libre, and studied their color palette, typography, and overall design language. I started by adding native Streamlit theming to customize buttons, input fields, and focus states. From there, I created a custom CSS theme using shades of teal inspired by the CGM interface. I also designed an animated glucose trace using SVG graphics, complete with rounded corners and a subtle graph texture in the background. I spent quite a bit of time tweaking the animation, transparency, and line thickness until the interface felt clean without being distracting.</p>
+                                    <p>To further improve the design, I replaced the default emojis with Google's rounded Material Symbols, giving the application a more polished and consistent look. I also updated the icons used throughout the medication panel and source citations and added a small footer to the sidebar with information about the assistant and the clinical guideline sources.</p>
+                                    <p>This ended up taking much longer than I expected because I kept revisiting small design decisions—things like animation timing, spacing, and whether certain visual elements actually improved the interface. Even so, I enjoyed every minute of it. By the end of the day, the application finally had a visual identity that felt unique, professional, and exactly how I had envisioned it.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-8" onclick="toggleDropdown('p1-blog-8', event)">
+                                    <span class="blog-date">Day 8 - 8/5</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-8" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today, I focused on improving the quality of the assistant's retrieval. During testing, I noticed that the model occasionally struggled with follow-up questions because it would retrieve multiple chunks containing nearly identical information. To improve this, I implemented Maximal Marginal Relevance (MMR), which balances relevance with diversity by selecting useful context while avoiding redundant document chunks.</p>
+                                    <p>I created a new <code>retrieve_chunks()</code> function that first uses Chroma's <code>similarity_search_with_score()</code> to identify the most relevant candidates. If the best match isn't relevant enough, the assistant refuses to answer. Otherwise, it uses <code>max_marginal_relevance_search()</code> to retrieve a diverse set of highly relevant chunks. I also updated several other functions to integrate this new retrieval pipeline.</p>
+                                    <p>Another important improvement was calibrating the similarity score cutoff. I tested the application using a variety of in-scope and out-of-scope questions, recorded their similarity scores, and found that a cutoff of 0.35 provided the best balance. Questions below this threshold consistently retrieved relevant guideline information, while those above it were correctly rejected. After extensive testing, the assistant became much more reliable at knowing when it should—and shouldn't—answer.</p>
+                                    <p>Finally, I added a set of suggested questions to make the application more approachable for first-time users. Six sample questions now appear on the home screen as interactive buttons. Hover effects provide visual feedback, and clicking a suggestion immediately sends the question to the assistant. It's a small addition, but it makes the application feel much more welcoming and easier to explore.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-9" onclick="toggleDropdown('p1-blog-9', event)">
+                                    <span class="blog-date">Day 9 - 8/6</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-9" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today's work focused on polishing both the application's functionality and user experience. I started by adding a Guidelines section to the sidebar, allowing users to quickly see which clinical guidelines and versions the assistant is using. I also added a simple status indicator that checks each guideline's publication year. Since all of my current sources are from 2026, they're marked as Current, but in future years the application will automatically prompt users to check for newer versions.</p>
+                                    <p>Next, I experimented with adding category filters so users could restrict searches to areas like medications or statistics. This required tagging sections of every guideline and updating the retrieval pipeline to filter based on those categories. After several hours of implementation, I stepped back and realized the feature didn't actually improve the user experience. Since users can simply ask the assistant to focus on medications or statistics in natural language, the filters added unnecessary complexity. I decided to remove the feature entirely and roll back the changes. While it felt frustrating at first, it was a good reminder that not every idea makes the final product better.</p>
+                                    <p>I also improved how conversations are managed. Since Streamlit doesn't persist chats after the application is closed, I added session-based chat history so conversations survive page refreshes. I then created an Export Chat button that saves the conversation as a Markdown file, making it easy for clinicians or students to reference previous discussions. Finally, I added a New Chat button so users can start a fresh conversation without restarting the application.</p>
+                                    <p>To wrap up the day, I focused on polishing the interface. I updated the styling of the buttons to better match the overall theme and reorganized the source citations with cleaner spacing, dividers, and icons. These changes don't add new functionality, but they make the application feel much more refined. By the end of the day, I felt the UI had reached a level of polish that I was genuinely proud of.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p1-blog-10" onclick="toggleDropdown('p1-blog-10', event)">
+                                    <span class="blog-date">Day 10 - 8/7</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p1-blog-10" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the application complete, the final step was preparing it for release. I started by creating a <code>requirements.txt</code> file so anyone could easily install the project's dependencies. I also added an open-source license and created an <code>assets</code> folder to store screenshots of the application and an architecture diagram for the repository.</p>
+                                    <p>After that, I created a GitHub repository and pushed the project, excluding files that didn't belong in version control, such as my API keys, exported chat files, and other local system data. I then deployed the application using Streamlit Community Cloud. The initial deployment failed because a few dependency versions in my requirements file didn't match my local environment, but after updating them, the application deployed successfully.</p>
+                                    <p>Once everything was live, I turned my attention to the README. I wanted it to be just as polished as the project itself, so I wrote detailed sections covering the application's purpose, features, technology stack, project structure, and setup instructions. I also added badges, screenshots, and an architecture diagram that I designed in Excalidraw using the same color palette as the application's UI. After one final review, I published the repository.</p>
+                                    <p>Looking back, this project took roughly 40 hours spread across ten days. More importantly, it taught me a tremendous amount about retrieval-augmented generation, vector databases, prompt engineering, and building production-ready AI applications. There were certainly frustrating moments, but solving those problems made the project even more rewarding. I'm especially excited to demonstrate the application to primary care physicians at a local hospital and gather feedback to continue improving it. With this project complete, I'm ready to take everything I learned into the next one.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="p1-skills" class="dropdown-content">
+                        <div class="project-skills-groups">
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Languages & Frameworks</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">LangChain</span>
+                                    <span class="skill-tag">Streamlit</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">AI & Machine Learning</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Retrieval-Augmented Generation (RAG)</span>
+                                    <span class="skill-tag">Prompt Engineering</span>
+                                    <span class="skill-tag">Vector Search</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">OpenAI API</span>
+                                    <span class="skill-tag">ChromaDB</span>
+                                    <span class="skill-tag">Git/GitHub</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Domain</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Clinical AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-feature-card experience-card soft-reveal">
+                <div class="experience-header">
+                    <h3 class="experience-title">Project 2 (Work in Progress)</h3>
+                    <div class="experience-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
+                            </svg>
+                            ...
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
+                            </svg>
+                            ...
+                        </span>
+                    </div>
+                </div>
+                <ul class="experience-details">
+                    <li>...</li>
+                </ul>
+
+                <div class="project-links-row">
+                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                        <span>Live Demo on Streamlit</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1.5V10M8 1.5L4.5 5M8 1.5L11.5 5M2.5 10.5V13C2.5 13.55 2.95 14 3.5 14H12.5C13.05 14 13.5 13.55 13.5 13V10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                        <span>View on GitHub</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M9 3L13 7L9 11M3 7H13"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="project-dropdowns">
+                    <div class="project-dropdown-triggers">
+                        <button class="dropdown-trigger" data-target="p2-blogs" onclick="toggleProjectDropdown('p2-blogs', 'p2-skills', event)">
+                            <span>Progress Blogs</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="dropdown-trigger" data-target="p2-skills" onclick="toggleProjectDropdown('p2-skills', 'p2-blogs', event)">
+                            <span>Skills</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="p2-blogs" class="dropdown-content">
+                        <div class="blogs-list">
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-1" onclick="toggleDropdown('p2-blog-1', event)">
+                                    <span class="blog-date">...</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-1" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="p2-skills" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-feature-card experience-card soft-reveal">
+                <div class="experience-header">
+                    <h3 class="experience-title">Project 3 (Work in Progress)</h3>
+                    <div class="experience-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
+                            </svg>
+                            ...
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
+                            </svg>
+                            ...
+                        </span>
+                    </div>
+                </div>
+                <ul class="experience-details">
+                    <li>...</li>
+                </ul>
+
+                <div class="project-links-row">
+                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                        <span>Live Demo on Streamlit</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1.5V10M8 1.5L4.5 5M8 1.5L11.5 5M2.5 10.5V13C2.5 13.55 2.95 14 3.5 14H12.5C13.05 14 13.5 13.55 13.5 13V10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                        <span>View on GitHub</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M9 3L13 7L9 11M3 7H13"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="project-dropdowns">
+                    <div class="project-dropdown-triggers">
+                        <button class="dropdown-trigger" data-target="p3-blogs" onclick="toggleProjectDropdown('p3-blogs', 'p3-skills', event)">
+                            <span>Progress Blogs</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="dropdown-trigger" data-target="p3-skills" onclick="toggleProjectDropdown('p3-skills', 'p3-blogs', event)">
+                            <span>Skills</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="p3-blogs" class="dropdown-content">
+                        <div class="blogs-list">
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p3-blog-1" onclick="toggleDropdown('p3-blog-1', event)">
+                                    <span class="blog-date">...</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p3-blog-1" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="p3-skills" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+    </div>
+
+    <div class="section-divider divider-ltd">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-dark">
+        <div class="container">
+        <!-- Section 3: Education -->
+        <section class="section" id="education">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="degrees">
+                <div class="degree-card soft-reveal">
+                    <h3 class="degree-title">
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 2L1 5.5L8 9L15 5.5L8 2Z"/>
+                            <path d="M4 7V10.5C4 11.5 5.8 12.8 8 12.8C10.2 12.8 12 11.5 12 10.5V7L8 9L4 7Z" opacity="0.85"/>
+                            <rect x="14.4" y="5.5" width="0.9" height="4.8"/>
+                        </svg>
+                        Bachelor of Science, Computer Science
+                    </h3>
+                    <p class="degree-subtitle">Machine Learning Specialization</p>
+                </div>
+                <div class="degree-card soft-reveal">
+                    <h3 class="degree-title">
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 1C8 1 3 3 3 8C3 11 5 14 8 15C11 14 13 11 13 8C13 3 8 1 8 1ZM8 13.5C6 12.5 4.5 10.5 4.5 8C4.5 8 8 8 8 3.5V13.5Z"/>
+                        </svg>
+                        Minor, Biological Sciences
+                    </h3>
+                    <p class="degree-subtitle">Pre-Med Track</p>
+                </div>
+            </div>
+
+            <button class="dropdown-trigger" onclick="toggleDropdown('courses', event)">
+                <span>Specialized Coursework</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <div id="courses" class="dropdown-content">
+                <div class="courses-section">
+                    <div class="course-category">
+                        <h3 class="category-title">Computer Science</h3>
+                        <div class="courses-grid">
+                            <div class="course-item">CMSC 14100: Introduction to Computer Science I</div>
+                            <div class="course-item">CMSC 14200: Introduction to Computer Science II</div>
+                            <div class="course-item">CMSC 14300: Systems Programming I</div>
+                            <div class="course-item">CMSC 14400: Systems Programming II</div>
+                            <div class="course-item">CMSC 20300: Introduction to Human-Computer Interaction</div>
+                            <div class="course-item">CMSC 22900: Quantum Computer Systems</div>
+                            <div class="course-item">CMSC 23200: Introduction to Computer Security</div>
+                            <div class="course-item">CMSC 25040: Introduction to Computer Vision</div>
+                            <div class="course-item">CMSC 25300: Mathematical Foundations of Machine Learning</div>
+                            <div class="course-item">CMSC 25800: Adversarial Machine Learning</div>
+                            <div class="course-item">CMSC 27100: Discrete Mathematics</div>
+                            <div class="course-item">CMSC 27200: Theory of Algorithms</div>
+                            <div class="course-item">CMSC 28000: Introduction to Formal Languages</div>
+                            <div class="course-item">CMSC 28400: Introduction to Cryptography</div>
+                            <div class="course-item">CMSC 33260: Internet Censorship and Online Speech</div>
+                            <div class="course-item">STAT 11800: Introduction to Data Science I</div>
+                        </div>
+                    </div>
+
+                    <div class="course-category">
+                        <h3 class="category-title">Biological Sciences</h3>
+                        <div class="courses-grid">
+                            <div class="course-item">BIOS 20171: Human Genetics and Developmental Biology</div>
+                            <div class="course-item">BIOS 20172: Mathematical Modeling for Pre-Med Students</div>
+                            <div class="course-item">BIOS 20173: Perspectives of Human Physiology</div>
+                            <div class="course-item">BIOS 20175: Biochemistry and Metabolism</div>
+                            <div class="course-item">BIOS 26120: An Introduction to Bioinformatics and Proteomics</div>
+                            <div class="course-item">BIOS 26122: Introduction to Machine Learning for Biology</div>
+                            <div class="course-item">BIOS 26123: Introduction to Python for Biologists & Neuroscientists</div>
+                            <div class="course-item">BIOS 28411: Quantitative Systems Biology</div>
+                            <div class="course-item">CHEM 11100: Comprehensive General Chemistry I</div>
+                            <div class="course-item">CHEM 11200: Comprehensive General Chemistry II</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+    </div>
+
+    <div class="section-divider divider-dtl">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-light">
+        <div class="container">
+        <!-- Section 4: Skills -->
+        <section class="section" id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category soft-reveal">
+                    <h3 class="skill-category-title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M5.5 3L1 8L5.5 13L6.6 11.9L3.2 8L6.6 4.1L5.5 3ZM10.5 3L9.4 4.1L12.8 8L9.4 11.9L10.5 13L15 8L10.5 3Z"/>
+                        </svg>
+                        Languages
+                    </h3>
+                    <button class="dropdown-trigger" onclick="toggleDropdown('languages', event)">
+                        <span>View List</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div id="languages" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category soft-reveal">
+                    <h3 class="skill-category-title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <circle cx="8" cy="3" r="1.6"/>
+                            <circle cx="3" cy="9" r="1.6"/>
+                            <circle cx="13" cy="9" r="1.6"/>
+                            <circle cx="8" cy="14" r="1.6"/>
+                            <path d="M8 4.6V7M6.5 8L4.3 8.8M9.5 8L11.7 8.8M6.8 10.2L7.3 12.6M9.2 10.2L8.7 12.6" stroke="currentColor" stroke-width="1" fill="none"/>
+                        </svg>
+                        ML / Frameworks
+                    </h3>
+                    <button class="dropdown-trigger" onclick="toggleDropdown('tools', event)">
+                        <span>View List</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div id="tools" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">scikit-learn</span>
+                            <span class="skill-tag">LangChain</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">Streamlit</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">RAG</span>
+                            <span class="skill-tag">Prompt Engineering</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category soft-reveal">
+                    <h3 class="skill-category-title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 1C5 1 2.5 1.8 2.5 2.8V4.2C2.5 5.2 5 6 8 6C11 6 13.5 5.2 13.5 4.2V2.8C13.5 1.8 11 1 8 1ZM2.5 6.2V8.6C2.5 9.6 5 10.4 8 10.4C11 10.4 13.5 9.6 13.5 8.6V6.2C12.4 7 10.3 7.4 8 7.4C5.7 7.4 3.6 7 2.5 6.2ZM2.5 10.6V13C2.5 14 5 14.8 8 14.8C11 14.8 13.5 14 13.5 13V10.6C12.4 11.4 10.3 11.8 8 11.8C5.7 11.8 3.6 11.4 2.5 10.6Z"/>
+                        </svg>
+                        Data Stack
+                    </h3>
+                    <button class="dropdown-trigger" onclick="toggleDropdown('libraries', event)">
+                        <span>View List</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div id="libraries" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">Chroma</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">SciPy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category soft-reveal">
+                    <h3 class="skill-category-title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.5 12.5C2.6 12.5 1 11 1 9C1 7.2 2.4 5.7 4.2 5.5C4.7 3.5 6.5 2 8.6 2C11 2 13 3.9 13.2 6.3C14.7 6.6 15.8 7.9 15.8 9.5C15.8 11.2 14.4 12.5 12.7 12.5H4.5Z"/>
+                        </svg>
+                        Cloud / Tools
+                    </h3>
+                    <button class="dropdown-trigger" onclick="toggleDropdown('frameworks', event)">
+                        <span>View List</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div id="frameworks" class="dropdown-content">
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Ansible</span>
+                            <span class="skill-tag">OpenAI API</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Jupyter</span>
+                            <span class="skill-tag">Matplotlib</span>
+                            <span class="skill-tag">LaTeX</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">PyCharm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+    </div>
+
+    <div class="section-divider divider-ltd">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-dark">
+        <div class="container">
+        <!-- Section 5: Experience -->
+        <section class="section" id="experience">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="experience-card soft-reveal">
+                <div class="experience-header">
+                    <span class="type-badge">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M6 2C5.4 2 5 2.4 5 3V4H2.5C1.7 4 1 4.7 1 5.5V12.5C1 13.3 1.7 14 2.5 14H13.5C14.3 14 15 13.3 15 12.5V5.5C15 4.7 14.3 4 13.5 4H11V3C11 2.4 10.6 2 10 2H6ZM6.5 3.3H9.5V4H6.5V3.3ZM2.3 7H13.7V8.3H9V7.7H7V8.3H2.3V7Z"/>
+                        </svg>
+                        Internship
+                    </span>
+                    <h3 class="experience-title">Software Development Internship</h3>
+                    <div class="experience-meta">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
+                            </svg>
+                            Outlier AI (Branch of Scale AI)
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 2C6.9 2 6 2.9 6 4C6 5.1 6.9 6 8 6C9.1 6 10 5.1 10 4C10 2.9 9.1 2 8 2ZM8 12C5.3 12 3 10.4 3 8.5C3 7.3 4.7 6.2 7 6C7.3 6 7.7 6 8 6C8.3 6 8.7 6 9 6C11.3 6.2 13 7.3 13 8.5C13 10.4 10.7 12 8 12Z"/>
+                            </svg>
+                            Remote
+                        </span>
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
+                            </svg>
+                            June 2024 – August 2024,   June 2025 – August 2025
+                        </span>
+                    </div>
+                </div>
+                <ul class="experience-details">
+                    <li>Created automated testing tools to support consistent and reproducible model deployments, improving training efficiency by 15%.</li>
+                    <li>Debugged and optimized production workflows, enhancing system reliability and reducing error rates in live systems.</li>
+                    <li>Built high-performance evaluation pipelines in Python/C++, optimizing evaluation frameworks and reducing runtime by 25%.</li>
+                </ul>
+            </div>
+        </section>
+
+        </div>
+    </div>
+
+    <div class="section-divider divider-dtl">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-light">
+        <div class="container">
+        <!-- Section 6: Clubs & Certifications -->
+        <section class="section" id="clubs">
+            <h2 class="section-title">Clubs & Certifications</h2>
+            
+            <div class="clubs-grid">
+                <div class="club-card soft-reveal">
+                    <span class="type-badge">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M5.5 7.5C6.6 7.5 7.5 6.6 7.5 5.5C7.5 4.4 6.6 3.5 5.5 3.5C4.4 3.5 3.5 4.4 3.5 5.5C3.5 6.6 4.4 7.5 5.5 7.5ZM11 7.5C11.9 7.5 12.7 6.7 12.7 5.8C12.7 4.8 11.9 4 11 4C10.9 4 10.7 4 10.6 4C10.9 4.4 11 5 11 5.5C11 6.1 10.8 6.7 10.5 7.1C10.6 7.4 10.8 7.5 11 7.5ZM5.5 8.5C4 8.5 1 9.3 1 10.8V12H10V10.8C10 9.3 7 8.5 5.5 8.5ZM11.5 8.5C11.3 8.5 11.1 8.5 10.9 8.6C11.6 9.1 12 9.8 12 10.8V12H15V10.8C15 9.3 12.9 8.5 11.5 8.5Z"/>
+                        </svg>
+                        Club
+                    </span>
+                    <h3 class="club-title">Alt Protein Accelerator</h3>
+                    <p class="club-subtitle">Club at The University of Chicago</p>
+                    <ul class="club-details">
+                        <li>Explored innovative solutions in alternative protein production by leveraging AI and computational biology tools like AlphaFold.</li>
+                        <li>Designed ethical growth factors, addressing key challenges in efficiency and scalability.</li>
+                    </ul>
+                </div>
+
+                <div class="club-card soft-reveal">
+                    <span class="type-badge">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M5 9.5L3 14L5.5 13L7 15L8.3 11.2C7 11 5.9 10.4 5 9.5ZM11 9.5C10.1 10.4 9 11 7.7 11.2L9 15L10.5 13L13 14L11 9.5ZM8 0C5.2 0 3 2.2 3 5C3 7.8 5.2 10 8 10C10.8 10 13 7.8 13 5C13 2.2 10.8 0 8 0ZM8 2C9.7 2 11 3.3 11 5C11 6.7 9.7 8 8 8C6.3 8 5 6.7 5 5C5 3.3 6.3 2 8 2Z"/>
+                        </svg>
+                        Certification
+                    </span>
+                    <h3 class="club-title">Udemy</h3>
+                    <p class="club-subtitle">Online Courses & Certifications</p>
+                    <ul class="club-details">
+                        <li>TensorFlow for Deep Learning Bootcamp</li>
+                        <li>PyTorch for Deep Learning Bootcamp</li>
+                    </ul>
+                </div>
+                
+                <div class="club-card soft-reveal">
+                    <span class="type-badge">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4 1V2H1.5V4C1.5 5.4 2.5 6.5 3.8 6.9C4.2 8 5 8.8 6 9.2V11H4V13H12V11H10V9.2C11 8.8 11.8 8 12.2 6.9C13.5 6.5 14.5 5.4 14.5 4V2H12V1H4ZM2.7 3H3.5V4.8C3 4.5 2.7 4 2.7 3.4V3ZM12.5 3H13.3V3.4C13.3 4 13 4.5 12.5 4.8V3Z"/>
+                        </svg>
+                        Practice
+                    </span>
+                    <h3 class="club-title">LeetCode</h3>
+                    <p class="club-subtitle">Algorithms & Data Structures</p>
+                    <ul class="club-details">
+                        <li>Finished 300+ problems</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+        </div>
+    </div>
+
+    <div class="section-divider divider-ltd">
+        <div class="divider-ornament">
+            <span class="divider-line"></span>
+            <span class="divider-diamond"></span>
+            <span class="divider-line"></span>
+        </div>
+    </div>
+
+    <div class="section-band theme-dark band-last">
+    <footer>
+        <div class="container">
+            <p>© 2026 Sohan Mulamalla. All rights reserved.</p>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        // Nav bar scrolling: offsets by the fixed nav bar's height so section
+        // titles don't end up hidden behind it, and scrolls to the true top for Home.
+        function scrollToSection(id) {
+            if (id === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            const target = document.getElementById(id);
+            const nav = document.querySelector('.site-nav');
+            if (!target) return;
+            const navHeight = nav ? nav.offsetHeight : 0;
+            const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
+
+        // Typewriter intro effect for the subtitle lines
+        (function () {
+            function typeInto(el, speed, delay) {
+                if (!el) return;
+                const text = el.getAttribute('data-text') || '';
+                el.textContent = '';
+                setTimeout(function () {
+                    el.classList.add('typing');
+                    let i = 0;
+                    function step() {
+                        if (i < text.length) {
+                            el.textContent += text.charAt(i);
+                            i++;
+                            setTimeout(step, speed);
+                        } else {
+                            el.classList.remove('typing');
+                        }
+                    }
+                    step();
+                }, delay);
+            }
+
+            typeInto(document.getElementById('tw-subtitle'), 28, 900);
+            typeInto(document.getElementById('tw-gradline'), 28, 2300);
+        })();
+
+        function toggleDropdown(id, event) {
+            const content = document.getElementById(id);
+            const trigger = event.currentTarget;
+
+            content.classList.toggle('active');
+            trigger.classList.toggle('active');
+        }
+
+        function toggleProjectDropdown(id, closeId, event) {
+            const content = document.getElementById(id);
+            const trigger = event.currentTarget;
+            const closeContent = document.getElementById(closeId);
+            const closeTrigger = document.querySelector('[data-target="' + closeId + '"]');
+
+            if (closeContent && closeContent.classList.contains('active')) {
+                closeContent.classList.remove('active');
+                if (closeTrigger) closeTrigger.classList.remove('active');
+            }
+
+            content.classList.toggle('active');
+            trigger.classList.toggle('active');
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        document.querySelectorAll('.soft-reveal').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Scroll-reactive background line movement: adds a velocity-based
+        // kick on top of the constant ambient drift animation, then eases
+        // back to neutral when scrolling stops.
+        (function () {
+            const bgLayer = document.querySelector('.background-decoration');
+            if (!bgLayer) return;
+
+            let lastScrollY = window.scrollY;
+            let velocity = 0;
+            let rafId = null;
+
+            function tick() {
+                const currentScrollY = window.scrollY;
+                const delta = currentScrollY - lastScrollY;
+                lastScrollY = currentScrollY;
+
+                velocity += (delta - velocity) * 0.25;
+
+                const offset = Math.max(-60, Math.min(60, velocity * 2.2));
+                bgLayer.style.transform = 'translateY(' + offset.toFixed(2) + 'px)';
+
+                velocity *= 0.9;
+
+                if (Math.abs(velocity) > 0.05) {
+                    rafId = requestAnimationFrame(tick);
+                } else {
+                    rafId = null;
+                    bgLayer.style.transform = '';
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!rafId) {
+                    rafId = requestAnimationFrame(tick);
+                }
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>
