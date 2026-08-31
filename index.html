@@ -1951,17 +1951,19 @@
                     </div>
                 </div>
                 <ul class="experience-details">
-                    <li>...</li>
+                    <li>Built an explainable heart disease risk prediction platform that compares five machine learning models and grounds every prediction in SHAP-based explanations traceable to individual clinical factors.</li>
+                    <li>Engineered a preprocessing and explainability pipeline featuring one-hot encoded features, a model-agnostic SHAP explainer compatible across five models, and empirical validation that uncovered and corrected an inverted dataset label.</li>
+                    <li>Developed a polished Streamlit application with live model comparison, an interactive hypothetical risk simulator, low-confidence factor flagging, Docker containerization, and a custom cardiac-inspired user interface.</li>
                 </ul>
 
                 <div class="project-links-row">
-                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                    <a href="https://cardiolens-ai.streamlit.app/" target="_blank" class="project-link">
                         <span>Live Demo on Streamlit</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 1.5V10M8 1.5L4.5 5M8 1.5L11.5 5M2.5 10.5V13C2.5 13.55 2.95 14 3.5 14H12.5C13.05 14 13.5 13.55 13.5 13V10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                    <a href="https://github.com/smulamalla/cardiolens-ai" target="_blank" class="project-link">
                         <span>View on GitHub</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M9 3L13 7L9 11M3 7H13"/>
@@ -2074,12 +2076,131 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-6" onclick="toggleDropdown('p2-blog-6', event)">
+                                    <span class="blog-date">Day 6 - 8/24</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-6" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the patient input form complete, today's goal was to connect the Streamlit interface to the actual prediction pipeline. I started by loading the best-performing model and saved scaler from my previous model evaluation. Since both artifacts are generated through the reproducible training pipeline I built earlier, the Streamlit application can use the exact same preprocessing and model configuration used during development.</p>
+                                    <p>I added a Predict Risk button that collects the 13 patient features and organizes them into a DataFrame in the same order expected by the model. The input is then transformed using the saved scaler before being passed to the model, which returns a predicted probability of heart disease.</p>
+                                    <p>To make the result easier to interpret visually, I created three application-defined risk categories: Low (&lt;30%), Moderate (30–70%), and High (≥70%). Each category is displayed with a corresponding color, along with a progress bar representing the model's predicted probability. These thresholds are currently intended as a visualization tool rather than clinically validated risk categories, which will be important to make clear in the final application.</p>
+                                    <p>Next, I integrated the SHAP explanation pipeline directly into Streamlit. For every prediction, the application generates a patient-specific SHAP visualization showing which features had the greatest influence on the model's output. I initially ran into a bug where the same visualization appeared after every prediction because I was referencing the wrong saved output. After fixing it, the explanation now updates correctly for each new patient. I also display the top three contributing features alongside their SHAP values, indicating whether each feature pushed the model's prediction toward or away from heart disease.</p>
+                                    <p>For now, I'm intentionally keeping the interface relatively simple and focusing on getting the entire prediction pipeline working correctly. One lesson I learned while building DiaGuide AI was that polishing the UI too early meant repeatedly redesigning it whenever I added a new feature. This time, I'm finishing the functionality first and saving the full visual redesign for the end. With prediction and explainability now working end-to-end, CardioLens AI is starting to feel like a complete application.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-7" onclick="toggleDropdown('p2-blog-7', event)">
+                                    <span class="blog-date">Day 7 - 8/25</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-7" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today, I wanted to give users more control over CardioLens AI by allowing them to choose which machine learning model generates their prediction. Instead of relying only on Logistic Regression, users can now switch between models such as Random Forest, K-Nearest Neighbors, Naive Bayes, and Decision Tree. When a different model is selected, the application loads the corresponding saved model and updates the prediction, SHAP visualization, and contributing factors accordingly.</p>
+                                    <p>Getting this to work was a little more complicated than expected. My original SHAP implementation was designed around Logistic Regression, and the different scikit-learn models didn't all behave identically when passed through the explanation pipeline. Some models prevented the patient input interface from loading, while others produced errors only after clicking Predict Risk. At first, I thought I would need a separate SHAP implementation for every model.</p>
+                                    <p>Fortunately, the solution ended up being much simpler. I created a <code>predictive_positive_class</code> wrapper that gives SHAP a consistent callable regardless of which model is selected. The wrapper standardizes the output by returning the model's predicted probability for the positive heart-disease class. With a consistent input/output format, the same SHAP pipeline can now explain predictions from each of the supported models without requiring separate implementations.</p>
+                                    <p>I then caught another important edge case involving the what-if comparison feature. If a user generates an original prediction, switches to another model, and then changes patient features for a what-if prediction, the application could accidentally compare results produced by two different models. That wouldn't be a meaningful comparison of the changed patient features. To prevent this, CardioLens AI now detects when the selected model has changed and asks the user to rerun the original prediction before continuing with the comparison.</p>
+                                    <p>With that fix, users can now explore multiple machine learning models while keeping the predictions and explanations consistent. It also gave me a good reminder that adding model flexibility isn't just about loading another <code>.pkl</code> file—the entire prediction and explanation pipeline needs to stay synchronized with the model being used.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-8" onclick="toggleDropdown('p2-blog-8', event)">
+                                    <span class="blog-date">Day 8 - 8/26</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-8" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Now it was time for my favorite part of the project: the UI. With DiaGuide AI, I designed the interface around the look and feel of a continuous glucose monitor, and I wanted CardioLens AI to have the same level of visual identity. This time, however, I built the design around cardiology—using dark reds, softer pinks, rounded components, animations, and Google's Material Symbols throughout the application.</p>
+                                    <p>One of my favorite additions was the animated ECG trace beneath the CardioLens AI title. It follows the same concept as the animated glucose graph I created for DiaGuide AI, but now resembles a heart monitor with a moving ECG waveform. I also added hover effects to buttons and consistent rounded icons beside each section heading to make the interface feel more cohesive.</p>
+                                    <p>I then redesigned how prediction results are presented. The predicted risk category now appears as a rounded pill badge with a visual indicator corresponding to low, moderate, or high predicted risk. I also reorganized the SHAP explanations into a collapsible Why This Prediction? section, with the feature-impact visualization on one side and the top contributing factors on the other. Rounded containers and badges were added throughout the prediction, SHAP, and what-if comparison sections to keep the design consistent.</p>
+                                    <p>I also made several structural changes. Model selection and performance information now live together in the sidebar, keeping model-related controls separate from the patient inputs. I moved the medical disclaimer to an acknowledgment screen shown when the application first launches, so users must confirm that they understand the project's intended use before continuing. This keeps the main interface cleaner while still making the application's limitations clear. Finally, I added a small footer identifying the Cleveland Heart Disease dataset as the source of the underlying data.</p>
+                                    <p>There are still a few design details I want to refine, but CardioLens AI finally has the visual identity I had imagined. Tomorrow, I'll focus on the final round of UI polish and getting the interface ready for the finished application.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-9" onclick="toggleDropdown('p2-blog-9', event)">
+                                    <span class="blog-date">Day 9 - 8/27</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-9" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today, my goal was to finish the CardioLens AI interface. I started with smaller improvements: centering and enlarging the Predict Risk button, making the patient input fields more symmetrical, replacing bullet points with arrows, improving spacing, and adding hover effects throughout the application. I also renamed What-If Comparison to Hypothetical Comparison, which felt more appropriate for the clinical setting. Each major section now includes a short explanation so users can quickly understand what they're looking at and how to interact with it.</p>
+                                    <p>I then focused on making the prediction results easier to interpret. The original and hypothetical predictions now include color-coded probability bars, while the SHAP section was redesigned into a cleaner bar chart showing the six features with the greatest impact on the model's prediction and whether they pushed it higher or lower. I also converted the feature impacts into percentage-point changes in the predicted probability, making the explanations much more intuitive for users who may not be familiar with raw SHAP values. Finally, I replaced abbreviated dataset labels with understandable names so that features such as <code>thal</code> and <code>thalach</code> aren't presented without context.</p>
+                                    <p>The Hypothetical Comparison received some of the biggest changes. When users adjust a modifiable feature, the interface now displays its original value alongside the amount it changed. The comparison visualization also shows how the predicted probability moves from the original prediction to the hypothetical one. Decreases are highlighted in green, while increases are shown in red, making the direction and magnitude of the change much easier to understand without constantly referring back to the original inputs.</p>
+                                    <p>I continued polishing the overall interface by adding more spacing, rounded containers, and subtle animations when prediction results appear. The patient input form now sits inside its own rounded container as well, helping it match the rest of the visual design.</p>
+                                    <p>Finally, I completely redesigned the Model Performance Dashboard in the sidebar. Instead of displaying a large table of every model and metric, users can select a performance metric from a dropdown and view a ranked bar chart comparing the models. I also added a Model Information section with brief explanations of how each algorithm works, which should make the application more approachable for users without a machine learning background. Logistic Regression is currently marked as the recommended default because it achieved the strongest ROC-AUC during my model evaluation, while users can still experiment with any of the five models.</p>
+                                    <p>After a lot of small iterations, the CardioLens AI interface finally feels complete. My goal was to take all of the machine learning happening behind the scenes and present it in a way that feels organized, understandable, and visually polished—and I'm really happy with where the final design ended up.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p2-blog-10" onclick="toggleDropdown('p2-blog-10', event)">
+                                    <span class="blog-date">Day 10 - 8/28</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p2-blog-10" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the interface complete, it was finally time to put CardioLens AI through some end-to-end testing. I created three sample patients designed to represent relatively low, moderate, and high predicted risk. Immediately, something seemed wrong—the results appeared almost completely backwards. The low-risk patient received a high prediction, while the high-risk patient received a low one.</p>
+                                    <p>After digging through the pipeline, I discovered that the problem wasn't with SHAP or the interface at all. The target encoding in my dataset was opposite to what my application assumed. My pipeline was interpreting <code>1</code> as heart disease being present and <code>0</code> as absent, while the dataset I was using encoded the outcome in the opposite direction. I went back to the preprocessing notebook, inverted the binary target so that <code>1</code> consistently represented heart disease, and reran the entire downstream pipeline. This meant regenerating the processed data, retraining the models, reevaluating them, and recreating the artifacts used for SHAP. After testing the same three patients again, the predictions finally behaved as expected.</p>
+                                    <p>Next, I wanted to make sure the application could run consistently outside of my local environment, so I containerized CardioLens AI with Docker. I created a <code>.dockerignore</code> to exclude development files that weren't necessary at runtime, such as the notebooks and raw training data, and wrote a Dockerfile containing the environment and dependencies required to run the application. After resolving a Python/dependency compatibility issue and rebuilding the image, I launched the container and tested the same three sample patients. Each produced the same results as my local application, confirming that the containerized version was working correctly.</p>
+                                    <p>With testing complete, I pushed the finished project to GitHub and deployed the application through Streamlit Community Cloud. This time, deployment worked on the first attempt—a nice improvement over DiaGuide AI, where I ran into several dependency issues during the initial release. And with that, CardioLens AI was officially complete!</p>
+                                    <p>Looking back, this project came together much faster than DiaGuide AI. Part of that was because the machine learning pipeline was relatively straightforward, using standard preprocessing techniques such as feature scaling and one-hot encoding to prepare the clinical data for training. A lot of the faster development also came from what I learned during my previous project. Streamlit was no longer new to me, I had a much better understanding of how to structure an application, and I could reference some of the design principles I developed for DiaGuide AI while still giving CardioLens AI its own identity.</p>
+                                    <p>More importantly, I feel increasingly comfortable working through the full lifecycle of an applied machine learning project—from exploring healthcare data and preprocessing it, to training and evaluating models, adding explainability, building an interactive application, testing it, containerizing it, and finally deploying it. My next step is to share CardioLens AI with Utah Cardiology and gather feedback from people who actually work in cardiology. I'm excited to see what they think and use their feedback to determine where the project can improve next.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div id="p2-skills" class="dropdown-content">
-                        <div class="skill-tags">
-                            <span class="skill-tag">...</span>
+                        <div class="project-skills-groups">
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Languages & Frameworks</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Streamlit</span>
+                                    <span class="skill-tag">scikit-learn</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">AI & Machine Learning</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Explainable AI (SHAP)</span>
+                                    <span class="skill-tag">Model Comparison</span>
+                                    <span class="skill-tag">Feature Engineering</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Git/GitHub</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Domain</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Clinical AI</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
