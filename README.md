@@ -10,7 +10,6 @@
 This is my personal portfolio: a single-page site built from scratch to introduce who I am and showcase the projects, experience, and skills behind my work applying machine learning to healthcare.
 
 ![Portfolio screenshot](assets/screenshot.png)
-*(add a screenshot of the live site here)*
 
 ---
 
