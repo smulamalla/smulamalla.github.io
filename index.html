@@ -2208,34 +2208,36 @@
 
             <div class="project-feature-card experience-card soft-reveal">
                 <div class="experience-header">
-                    <h3 class="experience-title">Project 3 (Work in Progress)</h3>
+                    <h3 class="experience-title">SoluScope AI</h3>
                     <div class="experience-meta">
                         <span>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M8 0L10.5 5.5L16 6.5L12 10.5L13 16L8 13L3 16L4 10.5L0 6.5L5.5 5.5L8 0Z"/>
                             </svg>
-                            ...
+                            Explainable Molecular Solubility Prediction
                         </span>
                         <span>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M5.5 0C4.7 0 4 0.7 4 1.5V2H2.5C1.7 2 1 2.7 1 3.5V14.5C1 15.3 1.7 16 2.5 16H13.5C14.3 16 15 15.3 15 14.5V3.5C15 2.7 14.3 2 13.5 2H12V1.5C12 0.7 11.3 0 10.5 0H5.5ZM5 2H11V3H5V2Z"/>
                             </svg>
-                            ...
+                            September 2026 - October 2026
                         </span>
                     </div>
                 </div>
                 <ul class="experience-details">
-                    <li>...</li>
+                    <li>Built an explainable molecular solubility prediction platform using ECFP molecular fingerprints and a tuned Support Vector Regressor (SVR) to estimate aqueous solubility directly from SMILES strings.</li>
+                    <li>Engineered a molecular machine learning pipeline featuring RDKit featurization, multi-model comparison, hyperparameter optimization, and held-out evaluation to develop and validate the final prediction model.</li>
+                    <li>Developed a polished Streamlit application with molecular structure visualization, physicochemical property analysis, substructure-based feature importance, input validation, and a custom drug discovery-inspired user interface.</li>
                 </ul>
 
                 <div class="project-links-row">
-                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                    <a href="https://soluscope-ai.streamlit.app/" target="_blank" class="project-link">
                         <span>Live Demo on Streamlit</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M8 1.5V10M8 1.5L4.5 5M8 1.5L11.5 5M2.5 10.5V13C2.5 13.55 2.95 14 3.5 14H12.5C13.05 14 13.5 13.55 13.5 13V10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                    <a href="https://github.com/smulamalla" target="_blank" class="project-link">
+                    <a href="https://github.com/smulamalla/soluscope-ai" target="_blank" class="project-link">
                         <span>View on GitHub</span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M9 3L13 7L9 11M3 7H13"/>
@@ -2263,14 +2265,99 @@
                         <div class="blogs-list">
                             <div class="blog-card">
                                 <button class="blog-date-trigger" data-target="p3-blog-1" onclick="toggleDropdown('p3-blog-1', event)">
-                                    <span class="blog-date">...</span>
+                                    <span class="blog-date">Day 1 - 9/7</span>
                                     <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </button>
                                 <div id="p3-blog-1" class="dropdown-content">
                                     <div class="blog-text">
-                                    <p>...</p>
+                                    <p>Time for a new project! While DiaGuide AI and CardioLens AI focused primarily on the biological and clinical sides of healthcare, I wanted SoluScope AI to explore something I hadn't focused on nearly as much: chemistry. I've always been fascinated by how different systems in the body interact, but those biological processes ultimately depend on chemistry. After focusing more heavily on clinical and biological applications in my previous projects, I wanted this one to push me into a different area.</p>
+                                    <p>SoluScope AI will be an explainable molecular property prediction application for drug discovery, specifically focused on predicting aqueous solubility. Solubility is an important molecular property in drug development, making it a great opportunity to combine my interests in machine learning, chemistry, and healthcare.</p>
+                                    <p>I started by creating a new project directory and virtual environment, then installed the core tools I would need: DeepChem for molecular machine learning workflows and featurization, RDKit for working with molecular structures and descriptors, PyTorch for deep learning, and scikit-learn for baseline models and evaluation. I also set up Streamlit and Docker for the application and deployment stages and saved the project's dependencies so the environment can be reproduced later.</p>
+                                    <p>Since I had never worked with DeepChem before, I started small. Following DeepChem's introductory tutorials, I created a toy NumPy dataset and converted it into DeepChem's dataset format. I then trained a simple <code>RandomForestRegressor</code> from scikit-learn through DeepChem's model interface and experimented with fitting, prediction, and evaluation. Everything worked smoothly, and I was surprised by how easily DeepChem could bring NumPy data and scikit-learn models into the same workflow.</p>
+                                    <p>With the basics down, I moved on to MoleculeNet and the ESOL (Delaney) dataset. ESOL contains 1,128 molecules with experimentally measured aqueous solubility values, making it a perfect starting point for SoluScope. I created a new notebook and explored how DeepChem organizes a MoleculeNet dataset into tasks, dataset splits, and transformers. Rather than immediately jumping into modeling, I wanted to understand the raw data and molecular representations first.</p>
+                                    <p>The dataset was divided into 902 training molecules (80%), 113 validation molecules (10%), and 113 test molecules (10%). I inspected the molecules, their SMILES representations, and their corresponding solubility labels to better understand exactly what the model would eventually learn from. With the dataset understood and my DeepChem environment working, the next step is to begin turning these molecular structures into features that a machine learning model can actually learn from.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p3-blog-2" onclick="toggleDropdown('p3-blog-2', event)">
+                                    <span class="blog-date">Day 2 - 9/8</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p3-blog-2" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the dataset understood, the next step was turning the molecules into something a machine learning model could actually learn from. The raw molecular structures are represented as SMILES strings, but my model needs numerical features. I used DeepChem's ECFP (Extended-Connectivity Fingerprint) featurizer, which represents the local substructures within each molecule as a fixed-length vector. I used 1,024-dimensional fingerprints, meaning every molecule was transformed into 1,024 features that the model could use to identify relationships between molecular structure and solubility.</p>
+                                    <p>The solubility labels were handled separately. Rather than featurizing them, I normalized the continuous target values to make training more stable while preserving their relationship to the molecule's measured solubility.</p>
+                                    <p>With the data prepared, I created a new notebook for model training. I built a DeepChem <code>MultitaskRegressor</code>, using a feed-forward neural network with two hidden layers containing 500 and 100 neurons. The network accepts the 1,024 ECFP features as input and learns to predict the molecule's solubility. When I first tried training it, however, I ran into an unexpected attribute error that turned out to be caused by compatibility issues between different versions of DeepChem and its dependencies rather than the model architecture itself.</p>
+                                    <p>After spending some time debugging, I decided the cleanest solution was to rebuild the environment using Python 3.11 instead of 3.12. I installed Python 3.11 through Homebrew, created a fresh virtual environment, reinstalled the dependencies, and switched my Jupyter kernel to the new environment. I also discovered a few missing dependencies along the way, including TensorFlow and PyTorch. This took much longer than expected because several of the error messages pointed toward modules that were already installed rather than the dependency that was actually causing the problem.</p>
+                                    <p>Eventually, everything worked, and I successfully trained the neural network for 100 epochs. From there, I moved on to evaluation using three metrics: R², to measure how much of the variation in solubility the model explains; MAE, to measure the average absolute prediction error; and RMSE, which penalizes larger prediction errors more heavily. I also compared training and test performance to look for signs of overfitting.</p>
+                                    <p>Finally, I plotted the model's predicted vs. experimental solubility values on the test set. The points clustered reasonably well around the ideal diagonal line across most of the range, with a few larger errors toward the extremes. More importantly, I didn't see an obvious pattern of consistently over- or underpredicting across the range. Seeing the predictions visually line up with the experimental values was a great sign that the first SoluScope model was learning meaningful relationships between molecular structure and solubility.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p3-blog-3" onclick="toggleDropdown('p3-blog-3', event)">
+                                    <span class="blog-date">Day 3 - 9/9</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p3-blog-3" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>Today, I focused on building out the molecular analysis features that will eventually power SoluScope AI. I started by testing the trained model on a few familiar molecules: ethanol, benzene, aspirin, and anthracene. These molecules provide a useful range of expected solubilities, with ethanol being highly water-soluble and anthracene being poorly soluble. I converted their SMILES representations into the same ECFP fingerprints used during training, created a DeepChem dataset, and passed them through the model. Since the solubility labels had been transformed during preprocessing, I used <code>untransform()</code> to convert the predictions back to their original scale. The results followed the expected trend, with ethanol predicted as the most soluble and anthracene as the least soluble.</p>
+                                    <p>With the core DeepChem workflow complete, I moved on to one of the first features I wanted to add myself: model comparison. Alongside my DeepChem <code>MultitaskRegressor</code>, I trained three scikit-learn models—Random Forest Regressor, Support Vector Regression (SVR), and Ridge Regression—on the same molecular data. After evaluating all four, SVR achieved the strongest performance in this comparison, while Ridge Regression performed the worst. I also created a bar chart comparing their scores that I can eventually include in the project's README and application.</p>
+                                    <p>Next, I experimented with molecular visualization using RDKit. Starting with aspirin, I converted its SMILES string into an RDKit molecule containing its atom and bond information and rendered the resulting 2D molecular structure. I then did the same for my other sample molecules and displayed them together in a grid. I was surprised by how straightforward RDKit made the entire process.</p>
+                                    <p>I also wanted SoluScope to provide useful molecular descriptors alongside its solubility predictions. Using RDKit's <code>Descriptors</code> and <code>Lipinski</code> modules, I calculated properties including molecular weight, LogP, hydrogen-bond donors and acceptors, rotatable bonds, and topological polar surface area (TPSA). It had been a while since my last chemistry course, so working with these properties was also a nice refresher! I used several of these descriptors to evaluate Lipinski's Rule of Five, which provides common guidelines for identifying potential oral drug-likeness concerns. Rather than treating the rules as a definitive measure of whether a molecule can become a drug, SoluScope can display violations as useful warnings for further investigation. I packaged the descriptor calculations into a reusable function that can eventually be called directly from the Streamlit interface.</p>
+                                    <p>Finally, I started exploring molecular feature importance. This reminded me of the explainability work I did for CardioLens AI, except this time the model has 1,024 ECFP fingerprint bits rather than recognizable clinical variables. Using the Random Forest model's <code>feature_importances_</code>, I identified the ten fingerprint bits that were most influential across the trained model. I then checked which of those globally important bits were present in aspirin's fingerprint and found two matches: bits 356 and 807.</p>
+                                    <p>Using RDKit's Morgan fingerprint visualization tools, I could trace those bits back to the corresponding atom environments within the molecule and actually visualize the molecular substructures they represent. I wrapped this process into another reusable function so that, once the Streamlit dashboard is built, a user will be able to submit a molecule and see its solubility prediction, molecular properties, and relevant fingerprint substructures all in one place.</p>
+                                    <p>This was one of my favorite development sessions so far because SoluScope is starting to become more than just a solubility prediction model. The combination of prediction, molecular visualization, chemical descriptors, model comparison, and fingerprint interpretation is beginning to make it feel like an actual molecular analysis tool.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p3-blog-4" onclick="toggleDropdown('p3-blog-4', event)">
+                                    <span class="blog-date">Day 4 - 9/10</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p3-blog-4" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the core functionality working, I started by tuning the model's hyperparameters. Since SVR performed best during my model comparison, I wanted to optimize it rather than rely on its default configuration. I created a parameter grid and used scikit-learn to evaluate 16 different hyperparameter combinations, selecting the configuration that performed best during tuning. After applying those parameters to the final SVR model, I achieved a test R² of 0.73—an improvement of 0.09 R² points over the previous model.</p>
+                                    <p>With the final model ready, it was finally time to turn SoluScope AI into an actual application. I installed Streamlit, created <code>app.py</code>, and started with the simplest possible interface: a SMILES input and a Predict button. Behind the scenes, the application loads the saved model and transformer, converts the submitted SMILES into the same molecular fingerprint representation used during training, generates a prediction, and reverses the target transformation to return the predicted log solubility in its original scale. After testing several molecules, the complete prediction pipeline was working!</p>
+                                    <p>From there, I moved on to one of my favorite parts of every project: designing the interface. I wanted SoluScope to feel visually distinct from DiaGuide AI and CardioLens AI while still sharing some of the design language I've developed across my projects. Since this project revolves around aqueous solubility, I built the interface around different shades of blue and incorporated Google's rounded Material Symbols throughout the application. I organized the results into individual cards for the prediction, molecular properties, molecular structure, and other analyses so that each piece of information had a clear place.</p>
+                                    <p>I also continued my tradition of giving each project its own animated visual element. DiaGuide AI had its glucose-inspired animation, CardioLens AI had its ECG trace, and SoluScope now has animated water bubbles flowing beneath the title. It's a small detail, but I really enjoy giving each application a visual identity that reflects what the project is actually about.</p>
+                                    <p>In the sidebar, I added sections explaining the SVR model and the ESOL dataset, along with a small footer identifying the project's data source. I also created a "Why This Prediction?" section to bring some of my earlier fingerprint analysis into the application. It displays important molecular substructures present in the submitted molecule alongside a visualization of globally important ECFP fingerprint bits identified through my Random Forest feature-importance analysis. Since the final prediction comes from SVR, I made sure to treat this as supporting structural insight rather than claiming that the Random Forest importance values directly explain the SVR prediction.</p>
+                                    <p>Finally, I added an acknowledgment screen explaining the intended use of SoluScope AI. The application is an educational molecular machine learning project, and its predictions should not be used to make real drug-development decisions without appropriate experimental and scientific validation. Users have to acknowledge this before entering the application.</p>
+                                    <p>I also created a separate notebook to prepare the fingerprint-importance information needed by the interface. I extracted the 10 most important ECFP bits from the Random Forest analysis and serialized the necessary data with Pickle so that Streamlit can load it without rerunning the analysis every time the application starts.</p>
+                                    <p>At this point, SoluScope is starting to feel like a finished product rather than a collection of notebooks. A user can enter a molecular structure as SMILES, generate a solubility prediction, inspect the molecule and its chemical properties, and explore some of the structural features associated with the model's training data—all through a single interface.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="blog-card">
+                                <button class="blog-date-trigger" data-target="p3-blog-5" onclick="toggleDropdown('p3-blog-5', event)">
+                                    <span class="blog-date">Day 5 - 9/11</span>
+                                    <svg class="blog-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <div id="p3-blog-5" class="dropdown-content">
+                                    <div class="blog-text">
+                                    <p>With the application built, it was time for some final end-to-end testing and UI polish. Simple molecules like ethanol worked without any problems, but when I tested other molecules such as acetic acid, I consistently ran into an image-rendering error. After tracing the problem through the molecular visualization pipeline, I discovered that <code>DrawMorganBit()</code> was returning an SVG string instead of the image format my interface expected whenever the molecule contained one of the globally important fingerprint bits. Ethanol happened not to contain one of those bits, which explained why it had worked perfectly during my earlier tests. I fixed the issue by setting <code>useSVG=False</code>, ensuring the fingerprint visualization returned an image format that the application could display consistently.</p>
+                                    <p>I also spent some time refining how the predicted log solubility is communicated to the user. After experimenting with several ranges, I settled on application-defined categories of highly soluble (&gt; -1), moderately soluble (-3 to -1), and poorly soluble (&lt; -3). These aren't intended to be universal scientific classifications, but they give users an easier way to interpret the raw predicted log-solubility value. I also enlarged the substructure visualizations whenever an important fingerprint bit was present so users could actually inspect the relevant portion of the molecule.</p>
+                                    <p>From there, most of my work was focused on smaller usability and design improvements. I temporarily added "CCO — Ethanol" as an example near the SMILES input so new users would immediately understand the expected format. I added input validation to catch SMILES strings that were unusually short or long, adjusted the card dimensions until the layout felt symmetrical, darkened the subtitles, and continued refining the typography. I eventually switched the interface to IBM Plex Sans, which immediately made everything feel cleaner. I like it enough that I may go back and update DiaGuide AI and CardioLens AI with the same font!</p>
+                                    <p>Once the interface was finished, I containerized SoluScope AI with Docker so the application and its dependencies could be reproduced consistently. I then pushed the completed project to GitHub and created a comprehensive README containing project screenshots, model information, setup instructions, and other assets. Finally, I deployed the application through Streamlit Community Cloud. Deployment required one last environment-specific fix: adding the libxrender1 system package so RDKit's rendering functionality could work correctly in the deployed Linux environment. After that, SoluScope AI was officially live!</p>
+                                    <p>Overall, this project was a lot of fun to build. This was my first time working with both DeepChem and RDKit, and I was surprised by how much functionality they provide for molecular machine learning. DeepChem made it straightforward to move between molecular datasets, featurization, training, and evaluation, while RDKit made tasks like parsing SMILES, calculating molecular descriptors, and visualizing molecular structures much easier than I expected.</p>
+                                    <p>SoluScope was intentionally a smaller and faster project than DiaGuide AI and CardioLens AI, but that was part of the goal. I wanted my third project to move beyond the primarily biological and clinical focus of the first two and explore more of the chemistry behind drug discovery. Along the way, I learned how molecules can be represented computationally through SMILES, converted into ECFP fingerprints for machine learning, analyzed through molecular descriptors, and ultimately used to predict properties such as aqueous solubility.</p>
+                                    <p>And with that, SoluScope AI is complete! Across these three projects, I've now had the opportunity to explore three very different applications of AI in healthcare—from clinical guidelines with DiaGuide AI, to patient-level prediction with CardioLens AI, and now molecular property prediction with SoluScope AI. Each one has pushed me into a different part of the field, and SoluScope was a great introduction to the intersection of machine learning, chemistry, and drug discovery.</p>
                                     </div>
                                 </div>
                             </div>
@@ -2278,8 +2365,42 @@
                     </div>
 
                     <div id="p3-skills" class="dropdown-content">
-                        <div class="skill-tags">
-                            <span class="skill-tag">...</span>
+                        <div class="project-skills-groups">
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Languages & Frameworks</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">scikit-learn</span>
+                                    <span class="skill-tag">Streamlit</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">AI & Machine Learning</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Regression</span>
+                                    <span class="skill-tag">Support Vector Machines (SVM)</span>
+                                    <span class="skill-tag">Hyperparameter Optimization</span>
+                                    <span class="skill-tag">Feature Importance</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">DeepChem</span>
+                                    <span class="skill-tag">RDKit</span>
+                                    <span class="skill-tag">MoleculeNet</span>
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Git/GitHub</span>
+                                </div>
+                            </div>
+                            <div class="project-skill-group">
+                                <h4 class="project-skill-group-title">Domain</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Drug Discovery</span>
+                                    <span class="skill-tag">Cheminformatics</span>
+                                    <span class="skill-tag">Molecular Property Prediction</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
